@@ -10,18 +10,27 @@
 </head>
 <body>
 	<div class="container">
-		<h2>CCDH Project Task Dashboard</h2>
+		<h2>CCDH Project Task Dashboard</h2> 
+		<!-- 
+		<div class="chart-view" role="group">
+		  View:
+		  <button type="button" onclick="createTasks('all')" class="view active">All Tickets</button>
+		  <button type="button" onclick="createTasks('streamlined')"class="view">Streamlined</button>
+		  <button type="button" class="view">Summary</button>
+		</div>
+	    -->
 		<div class="colorcode">
-		<span class="cc-tools-incomplete"><span class="cc-tools-complete">Tools</span>&nbsp; &nbsp;</span>
-		<span class="cc-dmh-incomplete"><span class="cc-dmh-complete">Data Model Harmonization</span>&nbsp; &nbsp;</span>
-		<span class="cc-term-incomplete"><span class="cc-term-complete">Terminology</span>&nbsp; &nbsp;</span>
+		Legend: 
 		<span class="cc-ops-incomplete"><span class="cc-ops-complete">Operations</span>&nbsp; &nbsp;</span>
 		<span class="cc-comdev-incomplete"><span class="cc-comdev-complete">Community Development</span>&nbsp; &nbsp;</span>
+		<span class="cc-dmh-incomplete"><span class="cc-dmh-complete">Data Model Harmonization</span>&nbsp; &nbsp;</span>
+		<span class="cc-term-incomplete"><span class="cc-term-complete">Terminology</span>&nbsp; &nbsp;</span>
+		<span class="cc-tools-incomplete"><span class="cc-tools-complete">Tools</span>&nbsp; &nbsp;</span>
 		</div>
 		<div class="gantt-target"></div>
 		<div class="btn-group" role="group">
-		  <button type="button" class="btn">Month</button>
-		  <button type="button" class="btn active">Year</button>
+		  <button type="button" class="btn active">Month</button>
+		  <button type="button" class="btn">Year</button>
 		</div>
 		<div><button class="admin" onclick="writeGanttDataFile()">Create TSV - All GitHub Issues</button></div>
 	</div>

@@ -20,50 +20,50 @@ function getGanttDate(milestone, opt) {
 			var str = milestone.title.toLowerCase();
 			if (str.search("phase 2") >= 0) {
 				if (opt == 0) {
-					date = '2020-05-01'; // default is start of Phase 2
+					date = '2020-04-01'; // default is start of Phase 2
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
-						date = '2020-05-01';
+						date = '2020-04-01';
 					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
-						date = '2020-08-01';
+						date = '2020-07-01';
 					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
-						date = '2020-11-01';
+						date = '2020-10-01';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
-						date = '2021-02-01';
+						date = '2021-01-01';
 					}
 				} else if (opt == 1) {
-					date = '2021-04-30'; // default is end of Phase 2
+					date = '2021-06-30'; // default is end of Phase 2
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
-						date = '2020-07-31';
+						date = '2020-06-30';
 					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
-						date = '2020-10-31';
+						date = '2020-09-30';
 					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
-						date = '2021-01-31';
+						date = '2020-12-31';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
-						date = '2021-04-30';
+						date = '2021-03-31';
 					}
 				}
 			} else if (str.search("phase 3") >= 0) {
 				if (opt == 0) {
-					date = '2021-05-01'; // default is start of Phase 3
+					date = '2021-04-01'; // default is start of Phase 3
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
-						date = '2021-05-01';
+						date = '2021-04-01';
 					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
-						date = '2021-08-01';
+						date = '2021-07-01';
 					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
-						date = '2021-11-01';
+						date = '2021-10-01';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
-						date = '2022-02-01';
+						date = '2022-01-01';
 					}
 				} else if (opt == 1) {
-					date = '2022-04-30'; // default is end of Phase 3
+					date = '2022-06-30'; // default is end of Phase 3
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
-						date = '2021-07-31';
+						date = '2021-06-30';
 					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
-						date = '2021-10-31';
+						date = '2021-09-30';
 					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
-						date = '2022-01-31';
+						date = '2021-12-31';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
-						date = '2022-04-30';
+						date = '2022-03-31';
 					}
 				}
 			}
@@ -190,43 +190,6 @@ function sortTasks(alltasks) {
 	var phaseCompleteNum = [];
 	var phaseCompleteDen = [];
 	var phaseProgress = [];
-
-	/* test -- sorting by parent
-	var firstLevel = ['2a','2b','2c'];
-	var secondLevel = ['2a1','2a2','2b1','2b2'];
-	var secondLevelProgress = [0,0,0,0];
-	var secondLevelNumerator = [0,0,0,0];
-	var secondLevelDenominator = [0,0,0,0];
-	var secondLevelHasChild = [0,0,0,0]; // TO DO - if the item doesn't have a child, use the item's percent complete as the progress
-
-	for (var j = 0; j < secondLevel.length; j++) {
-		var item = [];
-		//defaults
-		item.id = secondLevel[j];
-		item.name = secondLevel[j];
-		item.start = '2020-05-01';
-		item.end = '2021-04-30';
-		item.dependencies = '';
-		item.url = '';
-		item.custom_class = '';
-		for (let i in alltasks) {
-			//check to see if the item exits or needs to be created
-			// calculate progress level
-			var str = alltasks[i].parent;
-			if (str != '') { 
-				if (str == secondLevel[j]) {
-					secondLevelNumerator[j] = secondLevelNumerator[j] + alltasks[i].progress;
-					secondLevelDenominator[j] = secondLevelDenominator[j] + 100;
-					secondLevelProgress[j] = Math.round((secondLevelNumerator[j] / secondLevelDenominator[j]) * 100);
-					secondLevelHasChild[j] = secondLevelHasChild[j] + 1
-					console.log(secondLevelNumerator[j],secondLevelDenominator[j],secondLevelProgress[j]);				
-				}
-			}
-		}
-		item.progress = secondLevelProgress[j];
-		sortedTasks.push(item);
-	}
-	*/
 	
 	
 	for (let i in alltasks) {
@@ -235,7 +198,8 @@ function sortTasks(alltasks) {
 		item.name = alltasks[i].name;
 		item.start = alltasks[i].start;
 		item.end = alltasks[i].end;
-		item.dependencies = alltasks[i].dependencies;
+		// disable dependencies -- too complicated
+		// item.dependencies = alltasks[i].dependencies;
 		item.progress = alltasks[i].progress;
 		//the GitHub issue URL to link to in the pop-up
 		item.url = alltasks[i].url;
@@ -361,13 +325,17 @@ function getRequest(repo, url, alltasks, resolve, reject) {
 	  xhttp.send();
 }
 
-function createTasks() {
+function createTasks(whichView) {
 	//This is the base GitHub API URL for the CCDH group
 	var url = "https://api.github.com/repos/cancerDHC/";
 	//var url = "https://api.github.com/repos/jen-martin/"; //test
 	
 	// These are the GitHub repo names to get issues from
-	var repos = ["community-development", "tools", "Terminology", "data-model-harmonization", "operations"];
+	var repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools" ];
+	if (whichView = 'streamlined') {
+		repos = ["community-development", "data-model-harmonization", "Terminology", "tools" ];
+	
+	}
 	//var repos = ["test-gantt", "jen-martin.github.io"]; //test
 		
 	//writeGanttDataFile();
@@ -381,10 +349,9 @@ function createTasks() {
 	}
 	Promise.all(promises).then(function() {
 		console.log('all promises executed');
-		//console.log(alltasks);
 
 		var tasks = sortTasks(alltasks); 
-		console.log(tasks);
+		//console.log(tasks);
 
 		var gantt = new Gantt(".gantt-target", tasks, {
 			//create a custom pop-up with the task URL
@@ -401,7 +368,7 @@ function createTasks() {
 			}
 		});
 		//sets the default view mode
-		gantt.change_view_mode('Year');
+		gantt.change_view_mode('Month');
 		
 		//change view mode dynamically
 		$(function() {
