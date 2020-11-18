@@ -24,29 +24,42 @@
 			position: relative;
 			float: right;
 		}
+		
+		/* styling for the legend DIV */
 		.colorcode div {padding: 3px; margin: 3px;} 
-		/* custom class for each repo */
+		
+		/* custom color coding for each repo */
+		/* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
 		.gantt .tools .bar { fill: #999999; }
 		.gantt .tools .bar-progress { fill: #666666; }
+		/* color styles for the repo legend bar */
 		.cc-tools-incomplete{background-color: #999999; margin-left: 0px; padding: 3px 0px;}
 		.cc-tools-complete {color: #fff; background-color: #666666; margin-left: 0px; padding: 3px;}
 		
+		/* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
 		.gantt .data-model-harmonization .bar { fill: #aace71;}
 		.gantt .data-model-harmonization .bar-progress { fill: #758e4f; }
+		/* color styles for the repo legend bar */
 		.cc-dmh-incomplete {background-color: #aace71; margin-left: 0px; padding: 3px 0px;}
 		.cc-dmh-complete {color: #fff; background-color: #758e4f;  margin-left: 0px; padding: 3px;}
 
+		/* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
 		.gantt .community-development .bar { fill: #6eb29d;}
 		.gantt .community-development .bar-progress { fill: #477164; }
+		/* color styles for the repo legend bar */
 		.cc-comdev-incomplete {background-color: #6eb29d; margin-left: 0px; padding: 3px 0px;}
 		.cc-comdev-complete {color: #fff; background-color: #477164;  margin-left: 0px; padding: 3px;}
 
+		/* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
 		.gantt .Terminology .bar { fill: #76e7f2;}
 		.gantt .Terminology .bar-progress { fill: #60bdc6; }
+		/* color styles for the repo legend bar */
 		.cc-term-incomplete {background-color: #76e7f2; margin-left: 0px; padding: 3px 0px;}
 		.cc-term-complete {color: #fff; background-color: #60bdc6;  margin-left: 0px; padding: 3px;}
 
+		/* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
 		.gantt .operations .bar { fill: #00bbff;}
 		.gantt .operations .bar-progress { fill: #0099d5; }
+		/* color styles for the repo legend bar */
 		.cc-ops-incomplete {background-color: #00bbff; margin-left: 0px; padding: 3px 0px;}
 		.cc-ops-complete {color: #fff; background-color: #0099d5;  margin-left: 0px; padding: 3px;}
