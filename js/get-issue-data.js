@@ -1,3 +1,12 @@
+// checks to see if issue is a pull request or issue.
+// returns true if issue; false if pull request.
+function isGHIssue(url) {
+	if (url.search("/pull/") >= 0) {
+		return false;
+	} else {
+		return true;
+	}
+}
 //Creates a unique ID for each GitHub issue.
 //Because we're gathering issues across multiple 
 //repos, the syntax of the id is:
@@ -217,7 +226,7 @@ function sortTasks(alltasks) {
 //Write all GitHub issues in all repos to a TSV file.
 function writeGanttDataFile() {
 	var tsvContent = 'id\ttitle\tstart_date\tend_date\tprogress\tdependencies\turl\n' ;
-	const repos = ["community-development", "tools", "Terminology", "data-model-harmonization", "operations"];
+	const repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools"];
 		
 	// For each repo, open a URL request, parse the issue data
 	// and then go to the next repo
@@ -231,7 +240,8 @@ function writeGanttDataFile() {
 		
 		let repoName = repos[j];
 		var url = "https://api.github.com/repos/cancerDHC/";
-		url = url + repoName + "/issues";
+		url = url + repoName + "/issues?state=all&per_page=100"; //gets all issues, up to 100
+		console.log("Sending request to get data: " + url);
 
 		request.open("GET", url);
 		request.onreadystatechange = function() {
@@ -242,27 +252,30 @@ function writeGanttDataFile() {
 				let tsvRow = '';
 				for (let i in data) {
 					
-					// Create the Gantt Chart task id:
-					// [repo name] + Issue # + [issue number]
-					// Note that task dependencies reference this field.
-					tsvRow = '\'' + getGanttID(repoName, data[i].number) + '\'';
-					
-					// Get the issue title
-					tsvRow += '\t\'' + data[i].title +'\'';
-					
-					// Determine the start and end dates from the issue milestone
-					tsvRow += '\t\'' + getGanttDate(data[i].milestone, 0) +'\''; //start date
-					tsvRow += '\t\'' + getGanttDate(data[i].milestone, 1) +'\''; //end date
+					// check if issue is a pull request or issue; if pull requeent, then ignore
+					if (isGHIssue(data[i].html_url)) {
+						// Create the Gantt Chart task id:
+						// [repo name] + Issue # + [issue number]
+						// Note that task dependencies reference this field.
+						tsvRow = '\'' + getGanttID(repoName, data[i].number) + '\'';
+						
+						// Get the issue title
+						tsvRow += '\t\'' + data[i].title +'\'';
+						
+						// Determine the start and end dates from the issue milestone
+						tsvRow += '\t\'' + getGanttDate(data[i].milestone, 0) +'\''; //start date
+						tsvRow += '\t\'' + getGanttDate(data[i].milestone, 1) +'\''; //end date
 
-					// TO DO - Determine Progress completed
-					tsvRow += '\t' + getGanttProgress(data[i].body, data[i].state);
+						// TO DO - Determine Progress completed
+						tsvRow += '\t' + getGanttProgress(data[i].body, data[i].state);
 
-					//Extract any dependencies from the issue body
-					tsvRow += '\t\'' + getGanttDependencies(data[i].body, repoName) +'\'';
-					// Log the repo url
-					tsvRow += '\t' + data[i].html_url + '\n';
-			
-					tsvContent += tsvRow;
+						//Extract any dependencies from the issue body
+						tsvRow += '\t\'' + getGanttDependencies(data[i].body, repoName) +'\'';
+						// Log the repo url
+						tsvRow += '\t' + data[i].html_url + '\n';
+				
+						tsvContent += tsvRow;
+					}
 				}
 				
 				// go to next repo
@@ -298,24 +311,27 @@ function getRequest(repo, url, alltasks, resolve, reject) {
 			// Create a gantt chart task for each issue in the repo.
 			// Syntax: https://frappe.io/gantt
 			for (let i in data) {
-				var item = [
-				{
-					 'id': getGanttID(repo, data[i].number),
-					 'name': data[i].title,
-					 'start': getGanttDate(data[i].milestone, 0),
-					 'end': getGanttDate(data[i].milestone, 1),
-					 'progress': getGanttProgress(data[i].body, data[i].state),
-					 'dependencies': getGanttDependencies(data[i].body,repo),
-					 //get the GitHub issue URL so we can link to it in the pop-up
-					 'url': data[i].html_url,
-					 //repo name
-					 'repo': repo,
-					 //parent item
-					 'parent': getParent(data[i].title, data[i].labels),
-					 //project phase
-					 'phase': getPhase(data[i].milestone, data[i].title),
-				}];
-				alltasks.push(item[0]); 
+				// check if issue is a pull request or issue; if pull requeent, then ignore
+				if (isGHIssue(data[i].html_url)) {
+					var item = [
+					{
+						 'id': getGanttID(repo, data[i].number),
+						 'name': data[i].title,
+						 'start': getGanttDate(data[i].milestone, 0),
+						 'end': getGanttDate(data[i].milestone, 1),
+						 'progress': getGanttProgress(data[i].body, data[i].state),
+						 'dependencies': getGanttDependencies(data[i].body,repo),
+						 //get the GitHub issue URL so we can link to it in the pop-up
+						 'url': data[i].html_url,
+						 //repo name
+						 'repo': repo,
+						 //parent item
+						 'parent': getParent(data[i].title, data[i].labels),
+						 //project phase
+						 'phase': getPhase(data[i].milestone, data[i].title),
+					}];
+					alltasks.push(item[0]); 
+				}
 			}
 		  
 		  return resolve();
@@ -332,11 +348,10 @@ function createTasks(whichView) {
 	
 	// These are the GitHub repo names to get issues from
 	var repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools" ];
-	if (whichView = 'streamlined') {
+	if (whichView == 'streamlined') {
 		repos = ["community-development", "data-model-harmonization", "Terminology", "tools" ];
 	
 	}
-	//var repos = ["test-gantt", "jen-martin.github.io"]; //test
 		
 	//writeGanttDataFile();
 	var alltasks = [];
@@ -385,4 +400,4 @@ function createTasks(whichView) {
 		//console.log(tasks);
 	});	
 }
-createTasks();
+createTasks('all');
