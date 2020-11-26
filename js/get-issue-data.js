@@ -287,6 +287,37 @@ function writeGanttDataFile() {
 	})(0, repos.length);
 };
 
+/* The GitHub API only returns up to 100 results per request.
+This function checks the number of issues in each repo. */ 
+function checkRepoPagination(repo, url, resolve, reject) {
+	url = url + repo.name + "/issues?state=all&per_page=1&page=0";
+	console.log("Sending request to get data: " + url);
+	console.log('checking pagination for '+ repo.name);
+    var xhttp;
+    if (window.XMLHttpRequest) {
+	  // code for modern browsers
+	  xhttp = new XMLHttpRequest();
+    } else {
+  	// code for IE6, IE5
+	  xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+	  	var data = JSON.parse(xhttp.responseText);
+		// number of GH issues will be in first item
+		var n = parseInt(data[0].number);
+		if (n > 100) {
+			repo.data_pages = Math.ceil(n/100);
+		}
+		console.log('checking pagination for '+ repo.name + ": " + repo.data_pages + " n=" + n);
+		return resolve();
+	} 
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+
+
 // Sends the GitHub API request for a particular repo, 
 // parses the response, and creates a gantt chart object
 // to display the information.
@@ -294,8 +325,8 @@ function writeGanttDataFile() {
 // https://github.com/frappe/gantt/issues/175 for implementation.
 // NOTE: If a repo has more than 100 issues, will need to get multiple 
 // "pages" of data.
-function getRequest(repo, url, alltasks, resolve, reject) {
-	url = url + repo + "/issues?state=all&per_page=100"; //gets all issues, up to 100
+function getRequest(repo, url, npages, alltasks, resolve, reject) {
+	url = url + repo + "/issues?state=all&per_page=100&page=" + npages; //gets all issues, up to 100
 	console.log("Sending request to get data: " + url);
 	  var xhttp;
 	  if (window.XMLHttpRequest) {
@@ -342,62 +373,89 @@ function getRequest(repo, url, alltasks, resolve, reject) {
 }
 
 function createTasks(whichView) {
+	
 	//This is the base GitHub API URL for the CCDH group
 	var url = "https://api.github.com/repos/cancerDHC/";
-	//var url = "https://api.github.com/repos/jen-martin/"; //test
 	
 	// These are the GitHub repo names to get issues from
-	var repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools" ];
-	if (whichView == 'streamlined') {
-		repos = ["community-development", "data-model-harmonization", "Terminology", "tools" ];
+	var allRepos = [
+		{name: "operations", data_pages: 1},
+		{name: "community-development", data_pages: 1},
+		{name: "data-model-harmonization", data_pages: 1},
+		{name: "Terminology", data_pages: 1},
+		{name: "tools", data_pages: 1}
+	];
 	
+	//check how many issues are in each repo. Max is 100 per "page" of results.
+	//send each call to each repo asynchronously and wait for them all to finish
+	console.log('checking repo length');
+	var issuePromises = [];
+	for(var i = 0; i < allRepos.length; i++) {
+		var p = new Promise(function(resolve, reject){checkRepoPagination(allRepos[i], url, resolve, reject);});
+		issuePromises.push(p);
 	}
+	//wait till all async calls have finihsed to continue getting data
+	Promise.all(issuePromises).then(function() {
+		console.log('all promises executed for getting GH issue pagination');
+
+		// limit repos to get issues from based on the View the user has selected
+		if (whichView == 'streamlined') {
+			var repos = ["community-development", "data-model-harmonization", "Terminology", "tools" ];
 		
-	//writeGanttDataFile();
-	var alltasks = [];
+		} else {
+			var repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools" ];
+		}
+			
+		//writeGanttDataFile();
+		var alltasks = [];
 
-	//sent each call to each repo asynchronously and wait for them all to finish
-	var promises = [];
-	for(var i = 0; i < repos.length; i++) {
-		var p = new Promise(function(resolve, reject){getRequest(repos[i], url, alltasks, resolve, reject);});
-		promises.push(p);
-	}
-	Promise.all(promises).then(function() {
-		console.log('all promises executed');
-
-		var tasks = sortTasks(alltasks); 
-		//console.log(tasks);
-
-		var gantt = new Gantt(".gantt-target", tasks, {
-			//create a custom pop-up with the task URL
-			custom_popup_html: function(task) {
-			  return `
-				<div class="details-container">
-				  <div class="title">${task.name}</div>
-				  <div class="subtitle">
-				  Due: ${task.end} &nbsp;&nbsp;&nbsp;&nbsp; ${task.progress}% Complete<br />
-				  <a href=${task.url} target="_blank">${task.url}</a>
-				  </div>
-				</div>
-			  `;
+		//send each call to each repo asynchronously and wait for them all to finish
+		var dataPromises = [];
+		for(var i = 0; i < repos.length; i++) {
+			//check which repo to get and how many pages of results
+			var npages = allRepos.find(x => x.name === repos[i]).data_pages;
+			console.log(npages);
+			for (var j = 0; j < npages; j++) {
+				var p = new Promise(function(resolve, reject){getRequest(repos[i], url, npages, alltasks, resolve, reject);});
+				dataPromises.push(p);
 			}
-		});
-		//sets the default view mode
-		gantt.change_view_mode('Month');
-		
-		//change view mode dynamically
-		$(function() {
-			$(".btn-group").on("click", "button", function() {
-				$btn = $(this);
-				var mode = $btn.text();
-				gantt.change_view_mode(mode);
-				$btn.parent().find('button').removeClass('active');
-				$btn.addClass('active');
+		}
+		Promise.all(dataPromises).then(function() {
+			console.log('all promises executed for collecting issue data');
+			var tasks = sortTasks(alltasks); 
+			//console.log(tasks);
+
+			var gantt = new Gantt(".gantt-target", tasks, {
+				//create a custom pop-up with the task URL
+				custom_popup_html: function(task) {
+				  return `
+					<div class="details-container">
+					  <div class="title">${task.name}</div>
+					  <div class="subtitle">
+					  Due: ${task.end} &nbsp;&nbsp;&nbsp;&nbsp; ${task.progress}% Complete<br />
+					  <a href=${task.url} target="_blank">${task.url}</a>
+					  </div>
+					</div>
+				  `;
+				}
 			});
+			//sets the default view mode
+			gantt.change_view_mode('Month');
+			
+			//change view mode dynamically
+			$(function() {
+				$(".btn-group").on("click", "button", function() {
+					$btn = $(this);
+					var mode = $btn.text();
+					gantt.change_view_mode(mode);
+					$btn.parent().find('button').removeClass('active');
+					$btn.addClass('active');
+				});
+			});
+			
+			
+			//console.log(tasks);
 		});
-		
-		
-		//console.log(tasks);
-	});	
+	});
 }
 createTasks('all');
