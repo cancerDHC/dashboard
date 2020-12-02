@@ -19,7 +19,7 @@ function getGanttID(repoName, issueNumber){
 //Gets the task start or date from the GitHub issue
 //milestone. Milestone should contain the phase (e.g., 
 //"Phase 2") and quarter (e.g., "Quarter 2"). Note that 
-//each phase starts in quarter 2 (5/1) and ends in
+//each phase starts in quarter 2 (4/1) and ends in
 //quarter 1 of the next calendar year.
 // opt = 0 gets the start date; opt = 1 gets the end date
 function getGanttDate(milestone, opt) {
@@ -28,6 +28,7 @@ function getGanttDate(milestone, opt) {
 		if (milestone.title != null) {
 			var str = milestone.title.toLowerCase();
 			if (str.search("phase 2") >= 0) {
+				//Phase 2 (Pilot): April 2020 - March 2021
 				if (opt == 0) {
 					date = '2020-04-01'; // default is start of Phase 2
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
@@ -40,7 +41,7 @@ function getGanttDate(milestone, opt) {
 						date = '2021-01-01';
 					}
 				} else if (opt == 1) {
-					date = '2021-06-30'; // default is end of Phase 2
+					date = '2021-03-31'; // default is end of Phase 2
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
 						date = '2020-06-30';
 					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
@@ -52,6 +53,7 @@ function getGanttDate(milestone, opt) {
 					}
 				}
 			} else if (str.search("phase 3") >= 0) {
+				// Phase 3 (Production): April 2021 - March 2022
 				if (opt == 0) {
 					date = '2021-04-01'; // default is start of Phase 3
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
@@ -64,7 +66,7 @@ function getGanttDate(milestone, opt) {
 						date = '2022-01-01';
 					}
 				} else if (opt == 1) {
-					date = '2022-06-30'; // default is end of Phase 3
+					date = '2022-03-31'; // default is end of Phase 3
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
 						date = '2021-06-30';
 					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
@@ -73,6 +75,48 @@ function getGanttDate(milestone, opt) {
 						date = '2021-12-31';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2022-03-31';
+					}
+				}
+			} else if (str.search("phase 4") >= 0) {
+				// Phase 4 (Operations): April 2022 - March 2023
+				if (opt == 0) {
+					date = '2022-04-01'; // default is start of Phase 4
+					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
+						date = '2022-04-01';
+					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
+						date = '2022-07-01';
+					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
+						date = '2022-10-01';
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
+						date = '2023-01-01';
+					}
+				} else if (opt == 1) {
+					date = '2023-03-31'; // default is end of Phase 4
+					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
+						date = '2022-06-30';
+					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
+						date = '2022-09-30';
+					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
+						date = '2022-12-31';
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
+						date = '2023-03-31';
+					}
+				}
+			} else if (str.search("phase 1") >= 0) {
+				// Phase 1 (Planning): Oct 2019-Mar 2020, two quarters
+				if (opt == 0) {
+					date = '2019-10-01'; // default is start of Phase 1
+					if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
+						date = '2019-10-01';
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
+						date = '2020-01-01';
+					}
+				} else if (opt == 1) {
+					date = '2020-03-31'; // default is end of Phase 1
+					if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
+						date = '2020-12-31';
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
+						date = '2020-03-31';
 					}
 				}
 			}
@@ -226,6 +270,31 @@ function sortTasks(alltasks) {
 //Write all GitHub issues in all repos to a TSV file.
 function writeGanttDataFile() {
 	var tsvContent = 'id\ttitle\tstart_date\tend_date\tprogress\tdependencies\turl\n' ;
+
+	// These are the GitHub repos to get issues from
+	var allRepos = [
+		{name: "operations", data_pages: 1},
+		{name: "community-development", data_pages: 1},
+		{name: "data-model-harmonization", data_pages: 1},
+		{name: "Terminology", data_pages: 1},
+		{name: "tools", data_pages: 1}
+	];
+	
+	//check how many issues are in each repo. Max is 100 per "page" of results.
+	//send each call to each repo asynchronously and wait for them all to finish
+	console.log('checking repo length');
+	var issuePromises = [];
+	for(var i = 0; i < allRepos.length; i++) {
+		var p = new Promise(function(resolve, reject){checkRepoPagination(allRepos[i], url, resolve, reject);});
+		issuePromises.push(p);
+	}
+	//wait till all async calls have finihsed to continue getting data
+	Promise.all(issuePromises).then(function() {
+		console.log('all promises executed for getting GH issue pagination');
+
+
+
+
 	const repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools"];
 		
 	// For each repo, open a URL request, parse the issue data
@@ -285,6 +354,7 @@ function writeGanttDataFile() {
 		request.send();
 		
 	})(0, repos.length);
+	});
 };
 
 /* The GitHub API only returns up to 100 results per request.
@@ -377,7 +447,7 @@ function createTasks(whichView) {
 	//This is the base GitHub API URL for the CCDH group
 	var url = "https://api.github.com/repos/cancerDHC/";
 	
-	// These are the GitHub repo names to get issues from
+	// These are the GitHub repos to get issues from
 	var allRepos = [
 		{name: "operations", data_pages: 1},
 		{name: "community-development", data_pages: 1},
