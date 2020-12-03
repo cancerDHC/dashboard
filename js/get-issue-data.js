@@ -22,7 +22,7 @@ function getGanttID(repoName, issueNumber){
 //each phase starts in quarter 2 (4/1) and ends in
 //quarter 1 of the next calendar year.
 // opt = 0 gets the start date; opt = 1 gets the end date
-function getGanttDate(milestone, opt) {
+function getGanttDate(milestone, opt, title) {
 	var date = '';
 	if (milestone != null) {
 		if (milestone.title != null) {
@@ -120,9 +120,22 @@ function getGanttDate(milestone, opt) {
 					}
 				}
 			}
-			return date;
+		}
+	} else {
+		// assign date based on title
+		var str = title.trim().toLowerCase();
+		str = str.split(' ')[0]; //get first "word" in the title
+		// assign operations phase 1 tickets (e.g., 1a1, 1a2, etc.) to Phase 1
+		var patt = /^1[a-z]/; //starts with digit-letter
+		if (patt.test(str)) {
+			if (opt == 0) {
+				date = '2019-10-01'; 
+			} else if (opt == 1) {
+				date = '2020-03-31';
+			}
 		}
 	}
+	return date;
 }
 
 // Gets the task phase
@@ -282,7 +295,6 @@ function writeGanttDataFile() {
 	
 	//check how many issues are in each repo. Max is 100 per "page" of results.
 	//send each call to each repo asynchronously and wait for them all to finish
-	console.log('checking repo length');
 	var issuePromises = [];
 	for(var i = 0; i < allRepos.length; i++) {
 		var p = new Promise(function(resolve, reject){checkRepoPagination(allRepos[i], url, resolve, reject);});
@@ -290,7 +302,7 @@ function writeGanttDataFile() {
 	}
 	//wait till all async calls have finihsed to continue getting data
 	Promise.all(issuePromises).then(function() {
-		console.log('all promises executed for getting GH issue pagination');
+		//console.log('all promises executed for getting GH issue pagination');
 
 
 
@@ -310,7 +322,7 @@ function writeGanttDataFile() {
 		let repoName = repos[j];
 		var url = "https://api.github.com/repos/cancerDHC/";
 		url = url + repoName + "/issues?state=all&per_page=100"; //gets all issues, up to 100
-		console.log("Sending request to get data: " + url);
+		//console.log("Sending request to get data: " + url);
 
 		request.open("GET", url);
 		request.onreadystatechange = function() {
@@ -332,8 +344,8 @@ function writeGanttDataFile() {
 						tsvRow += '\t\'' + data[i].title +'\'';
 						
 						// Determine the start and end dates from the issue milestone
-						tsvRow += '\t\'' + getGanttDate(data[i].milestone, 0) +'\''; //start date
-						tsvRow += '\t\'' + getGanttDate(data[i].milestone, 1) +'\''; //end date
+						tsvRow += '\t\'' + getGanttDate(data[i].milestone, 0, data[i].title) +'\''; //start date
+						tsvRow += '\t\'' + getGanttDate(data[i].milestone, 1, data[i].title) +'\''; //end date
 
 						// TO DO - Determine Progress completed
 						tsvRow += '\t' + getGanttProgress(data[i].body, data[i].state);
@@ -361,9 +373,7 @@ function writeGanttDataFile() {
 This function checks the number of issues in each repo. */ 
 function checkRepoPagination(repo, url, resolve, reject) {
 	url = url + repo.name + "/issues?state=all&per_page=1&page=0";
-	console.log("Sending request to get data: " + url);
-	console.log('checking pagination for '+ repo.name);
-    var xhttp;
+	var xhttp;
     if (window.XMLHttpRequest) {
 	  // code for modern browsers
 	  xhttp = new XMLHttpRequest();
@@ -379,7 +389,6 @@ function checkRepoPagination(repo, url, resolve, reject) {
 		if (n > 100) {
 			repo.data_pages = Math.ceil(n/100);
 		}
-		console.log('checking pagination for '+ repo.name + ": " + repo.data_pages + " n=" + n);
 		return resolve();
 	} 
   };
@@ -397,7 +406,7 @@ function checkRepoPagination(repo, url, resolve, reject) {
 // "pages" of data.
 function getRequest(repo, url, npages, alltasks, resolve, reject) {
 	url = url + repo + "/issues?state=all&per_page=100&page=" + npages; //gets all issues, up to 100
-	console.log("Sending request to get data: " + url);
+	//console.log("Sending request to get data: " + url);
 	  var xhttp;
 	  if (window.XMLHttpRequest) {
 		// code for modern browsers
@@ -418,8 +427,8 @@ function getRequest(repo, url, npages, alltasks, resolve, reject) {
 					{
 						 'id': getGanttID(repo, data[i].number),
 						 'name': data[i].title,
-						 'start': getGanttDate(data[i].milestone, 0),
-						 'end': getGanttDate(data[i].milestone, 1),
+						 'start': getGanttDate(data[i].milestone, 0, data[i].title),
+						 'end': getGanttDate(data[i].milestone, 1, data[i].title),
 						 'progress': getGanttProgress(data[i].body, data[i].state),
 						 'dependencies': getGanttDependencies(data[i].body,repo),
 						 //get the GitHub issue URL so we can link to it in the pop-up
@@ -458,7 +467,6 @@ function createTasks(whichView) {
 	
 	//check how many issues are in each repo. Max is 100 per "page" of results.
 	//send each call to each repo asynchronously and wait for them all to finish
-	console.log('checking repo length');
 	var issuePromises = [];
 	for(var i = 0; i < allRepos.length; i++) {
 		var p = new Promise(function(resolve, reject){checkRepoPagination(allRepos[i], url, resolve, reject);});
@@ -466,7 +474,7 @@ function createTasks(whichView) {
 	}
 	//wait till all async calls have finihsed to continue getting data
 	Promise.all(issuePromises).then(function() {
-		console.log('all promises executed for getting GH issue pagination');
+		//console.log('all promises executed for getting GH issue pagination');
 
 		// limit repos to get issues from based on the View the user has selected
 		if (whichView == 'streamlined') {
@@ -484,14 +492,13 @@ function createTasks(whichView) {
 		for(var i = 0; i < repos.length; i++) {
 			//check which repo to get and how many pages of results
 			var npages = allRepos.find(x => x.name === repos[i]).data_pages;
-			console.log(npages);
 			for (var j = 0; j < npages; j++) {
 				var p = new Promise(function(resolve, reject){getRequest(repos[i], url, npages, alltasks, resolve, reject);});
 				dataPromises.push(p);
 			}
 		}
 		Promise.all(dataPromises).then(function() {
-			console.log('all promises executed for collecting issue data');
+			//console.log('all promises executed for collecting issue data');
 			var tasks = sortTasks(alltasks); 
 			//console.log(tasks);
 
