@@ -125,13 +125,71 @@ function getGanttDate(milestone, opt, title) {
 		// assign date based on title
 		var str = title.trim().toLowerCase();
 		str = str.split(' ')[0]; //get first "word" in the title
-		// assign operations phase 1 tickets (e.g., 1a1, 1a2, etc.) to Phase 1
+		// Operations Phase 1 tickets (e.g., 1a1, 1a2, etc.) 
 		var patt = /^1[a-z]/; //starts with digit-letter
 		if (patt.test(str)) {
 			if (opt == 0) {
 				date = '2019-10-01'; 
 			} else if (opt == 1) {
 				date = '2020-03-31';
+			}
+		}
+		// Specific Operations Phase 2 tickets (e.g., 2a1, 2b1, etc.)
+		patt = /^2[a-z]\d/; //starts with 2-letter-digit
+		if (patt.test(str)) {
+			if (str.search("2a1:") >= 0) { //2a1 is due Phase 2 - Quarter 1
+				if (opt == 0) {
+					date = '2021-01-01';
+				} else if (opt == 1) {
+					date = '2021-03-31';
+				}
+			} else if (str.search("2b1a") >= 0) { //2b1a is due Phase 2 - Quarter 2
+				if (opt == 0) {
+					date = '2020-04-01';
+				} else if (opt == 1) {
+					date = '2020-06-30';
+				}
+			} else if (str.search("2b1b") >= 0) { //2b1b is due Phase 2 - Quarter 2
+				if (opt == 0) {
+					date = '2020-04-01';
+				} else if (opt == 1) {
+					date = '2020-06-30';
+				}
+			} else if (str.search("2b1d") >= 0) { //2b1d is due Phase 2 - Quarter 4
+				if (opt == 0) {
+					date = '2020-10-01';
+				} else if (opt == 1) {
+					date = '2020-12-31';
+				}
+			} else if (str.search("2b1e") >= 0) { //2b1e is due Phase 3 - Quarter 4
+				if (opt == 0) {
+					date = '2021-10-01';
+				} else if (opt == 1) {
+					date = '2021-12-31';
+				}
+			} else if (str.search("2b1f") >= 0) { //2b1f is due Phase 3 - Quarter 1
+				if (opt == 0) {
+					date = '2022-01-01';
+				} else if (opt == 1) {
+					date = '2022-03-31';
+				}
+			} else if (str.search("2b1g") >= 0) { //2b1g is due Phase 3 - Quarter 4
+				if (opt == 0) {
+					date = '2021-10-01';
+				} else if (opt == 1) {
+					date = '2021-12-31';
+				}
+			}
+		}
+		// Specific Deliverables
+		patt = /^del.e\d/; //starts with "Del.E followed by a number"
+		if (patt.test(str)) {
+			if (str.search("del.e2b") >= 0) {
+				if (opt == 0) {
+					date = '2019-10-01'; 
+				} else if (opt == 1) {
+					date = '2020-03-31';
+				}
 			}
 		}
 	}
