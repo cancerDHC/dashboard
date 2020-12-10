@@ -19,15 +19,16 @@ function getGanttID(repoName, issueNumber){
 //Gets the task start or date from the GitHub issue
 //milestone. Milestone should contain the phase (e.g., 
 //"Phase 2") and quarter (e.g., "Quarter 2"). Note that 
-//each phase starts in quarter 2 (5/1) and ends in
+//each phase starts in quarter 2 (4/1) and ends in
 //quarter 1 of the next calendar year.
 // opt = 0 gets the start date; opt = 1 gets the end date
-function getGanttDate(milestone, opt) {
+function getGanttDate(milestone, opt, title) {
 	var date = '';
 	if (milestone != null) {
 		if (milestone.title != null) {
 			var str = milestone.title.toLowerCase();
 			if (str.search("phase 2") >= 0) {
+				//Phase 2 (Pilot): April 2020 - March 2021
 				if (opt == 0) {
 					date = '2020-04-01'; // default is start of Phase 2
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
@@ -40,7 +41,7 @@ function getGanttDate(milestone, opt) {
 						date = '2021-01-01';
 					}
 				} else if (opt == 1) {
-					date = '2021-06-30'; // default is end of Phase 2
+					date = '2021-03-31'; // default is end of Phase 2
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
 						date = '2020-06-30';
 					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
@@ -52,6 +53,7 @@ function getGanttDate(milestone, opt) {
 					}
 				}
 			} else if (str.search("phase 3") >= 0) {
+				// Phase 3 (Production): April 2021 - March 2022
 				if (opt == 0) {
 					date = '2021-04-01'; // default is start of Phase 3
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
@@ -64,7 +66,7 @@ function getGanttDate(milestone, opt) {
 						date = '2022-01-01';
 					}
 				} else if (opt == 1) {
-					date = '2022-06-30'; // default is end of Phase 3
+					date = '2022-03-31'; // default is end of Phase 3
 					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
 						date = '2021-06-30';
 					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
@@ -75,10 +77,123 @@ function getGanttDate(milestone, opt) {
 						date = '2022-03-31';
 					}
 				}
+			} else if (str.search("phase 4") >= 0) {
+				// Phase 4 (Operations): April 2022 - March 2023
+				if (opt == 0) {
+					date = '2022-04-01'; // default is start of Phase 4
+					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
+						date = '2022-04-01';
+					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
+						date = '2022-07-01';
+					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
+						date = '2022-10-01';
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
+						date = '2023-01-01';
+					}
+				} else if (opt == 1) {
+					date = '2023-03-31'; // default is end of Phase 4
+					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
+						date = '2022-06-30';
+					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
+						date = '2022-09-30';
+					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
+						date = '2022-12-31';
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
+						date = '2023-03-31';
+					}
+				}
+			} else if (str.search("phase 1") >= 0) {
+				// Phase 1 (Planning): Oct 2019-Mar 2020, two quarters
+				if (opt == 0) {
+					date = '2019-10-01'; // default is start of Phase 1
+					if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
+						date = '2019-10-01';
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
+						date = '2020-01-01';
+					}
+				} else if (opt == 1) {
+					date = '2020-03-31'; // default is end of Phase 1
+					if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
+						date = '2020-12-31';
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
+						date = '2020-03-31';
+					}
+				}
 			}
-			return date;
+		}
+	} else {
+		// assign date based on title
+		var str = title.trim().toLowerCase();
+		str = str.split(' ')[0]; //get first "word" in the title
+		// Operations Phase 1 tickets (e.g., 1a1, 1a2, etc.) 
+		var patt = /^1[a-z]/; //starts with digit-letter
+		if (patt.test(str)) {
+			if (opt == 0) {
+				date = '2019-10-01'; 
+			} else if (opt == 1) {
+				date = '2020-03-31';
+			}
+		}
+		// Specific Operations Phase 2 tickets (e.g., 2a1, 2b1, etc.)
+		patt = /^2[a-z]\d/; //starts with 2-letter-digit
+		if (patt.test(str)) {
+			if (str.search("2a1:") >= 0) { //2a1 is due Phase 2 - Quarter 1
+				if (opt == 0) {
+					date = '2021-01-01';
+				} else if (opt == 1) {
+					date = '2021-03-31';
+				}
+			} else if (str.search("2b1a") >= 0) { //2b1a is due Phase 2 - Quarter 2
+				if (opt == 0) {
+					date = '2020-04-01';
+				} else if (opt == 1) {
+					date = '2020-06-30';
+				}
+			} else if (str.search("2b1b") >= 0) { //2b1b is due Phase 2 - Quarter 2
+				if (opt == 0) {
+					date = '2020-04-01';
+				} else if (opt == 1) {
+					date = '2020-06-30';
+				}
+			} else if (str.search("2b1d") >= 0) { //2b1d is due Phase 2 - Quarter 4
+				if (opt == 0) {
+					date = '2020-10-01';
+				} else if (opt == 1) {
+					date = '2020-12-31';
+				}
+			} else if (str.search("2b1e") >= 0) { //2b1e is due Phase 3 - Quarter 4
+				if (opt == 0) {
+					date = '2021-10-01';
+				} else if (opt == 1) {
+					date = '2021-12-31';
+				}
+			} else if (str.search("2b1f") >= 0) { //2b1f is due Phase 3 - Quarter 1
+				if (opt == 0) {
+					date = '2022-01-01';
+				} else if (opt == 1) {
+					date = '2022-03-31';
+				}
+			} else if (str.search("2b1g") >= 0) { //2b1g is due Phase 3 - Quarter 4
+				if (opt == 0) {
+					date = '2021-10-01';
+				} else if (opt == 1) {
+					date = '2021-12-31';
+				}
+			}
+		}
+		// Specific Deliverables
+		patt = /^del.e\d/; //starts with "Del.E followed by a number"
+		if (patt.test(str)) {
+			if (str.search("del.e2b") >= 0) {
+				if (opt == 0) {
+					date = '2019-10-01'; 
+				} else if (opt == 1) {
+					date = '2020-03-31';
+				}
+			}
 		}
 	}
+	return date;
 }
 
 // Gets the task phase
@@ -226,6 +341,30 @@ function sortTasks(alltasks) {
 //Write all GitHub issues in all repos to a TSV file.
 function writeGanttDataFile() {
 	var tsvContent = 'id\ttitle\tstart_date\tend_date\tprogress\tdependencies\turl\n' ;
+
+	// These are the GitHub repos to get issues from
+	var allRepos = [
+		{name: "operations", data_pages: 1},
+		{name: "community-development", data_pages: 1},
+		{name: "data-model-harmonization", data_pages: 1},
+		{name: "Terminology", data_pages: 1},
+		{name: "tools", data_pages: 1}
+	];
+	
+	//check how many issues are in each repo. Max is 100 per "page" of results.
+	//send each call to each repo asynchronously and wait for them all to finish
+	var issuePromises = [];
+	for(var i = 0; i < allRepos.length; i++) {
+		var p = new Promise(function(resolve, reject){checkRepoPagination(allRepos[i], url, resolve, reject);});
+		issuePromises.push(p);
+	}
+	//wait till all async calls have finihsed to continue getting data
+	Promise.all(issuePromises).then(function() {
+		//console.log('all promises executed for getting GH issue pagination');
+
+
+
+
 	const repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools"];
 		
 	// For each repo, open a URL request, parse the issue data
@@ -241,7 +380,7 @@ function writeGanttDataFile() {
 		let repoName = repos[j];
 		var url = "https://api.github.com/repos/cancerDHC/";
 		url = url + repoName + "/issues?state=all&per_page=100"; //gets all issues, up to 100
-		console.log("Sending request to get data: " + url);
+		//console.log("Sending request to get data: " + url);
 
 		request.open("GET", url);
 		request.onreadystatechange = function() {
@@ -263,8 +402,8 @@ function writeGanttDataFile() {
 						tsvRow += '\t\'' + data[i].title +'\'';
 						
 						// Determine the start and end dates from the issue milestone
-						tsvRow += '\t\'' + getGanttDate(data[i].milestone, 0) +'\''; //start date
-						tsvRow += '\t\'' + getGanttDate(data[i].milestone, 1) +'\''; //end date
+						tsvRow += '\t\'' + getGanttDate(data[i].milestone, 0, data[i].title) +'\''; //start date
+						tsvRow += '\t\'' + getGanttDate(data[i].milestone, 1, data[i].title) +'\''; //end date
 
 						// TO DO - Determine Progress completed
 						tsvRow += '\t' + getGanttProgress(data[i].body, data[i].state);
@@ -285,7 +424,36 @@ function writeGanttDataFile() {
 		request.send();
 		
 	})(0, repos.length);
+	});
 };
+
+/* The GitHub API only returns up to 100 results per request.
+This function checks the number of issues in each repo. */ 
+function checkRepoPagination(repo, url, resolve, reject) {
+	url = url + repo.name + "/issues?state=all&per_page=1&page=0";
+	var xhttp;
+    if (window.XMLHttpRequest) {
+	  // code for modern browsers
+	  xhttp = new XMLHttpRequest();
+    } else {
+  	// code for IE6, IE5
+	  xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+	  	var data = JSON.parse(xhttp.responseText);
+		// number of GH issues will be in first item
+		var n = parseInt(data[0].number);
+		if (n > 100) {
+			repo.data_pages = Math.ceil(n/100);
+		}
+		return resolve();
+	} 
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+
 
 // Sends the GitHub API request for a particular repo, 
 // parses the response, and creates a gantt chart object
@@ -294,9 +462,9 @@ function writeGanttDataFile() {
 // https://github.com/frappe/gantt/issues/175 for implementation.
 // NOTE: If a repo has more than 100 issues, will need to get multiple 
 // "pages" of data.
-function getRequest(repo, url, alltasks, resolve, reject) {
-	url = url + repo + "/issues?state=all&per_page=100"; //gets all issues, up to 100
-	console.log("Sending request to get data: " + url);
+function getRequest(repo, url, npages, alltasks, resolve, reject) {
+	url = url + repo + "/issues?state=all&per_page=100&page=" + npages; //gets all issues, up to 100
+	//console.log("Sending request to get data: " + url);
 	  var xhttp;
 	  if (window.XMLHttpRequest) {
 		// code for modern browsers
@@ -317,8 +485,8 @@ function getRequest(repo, url, alltasks, resolve, reject) {
 					{
 						 'id': getGanttID(repo, data[i].number),
 						 'name': data[i].title,
-						 'start': getGanttDate(data[i].milestone, 0),
-						 'end': getGanttDate(data[i].milestone, 1),
+						 'start': getGanttDate(data[i].milestone, 0, data[i].title),
+						 'end': getGanttDate(data[i].milestone, 1, data[i].title),
 						 'progress': getGanttProgress(data[i].body, data[i].state),
 						 'dependencies': getGanttDependencies(data[i].body,repo),
 						 //get the GitHub issue URL so we can link to it in the pop-up
@@ -342,62 +510,87 @@ function getRequest(repo, url, alltasks, resolve, reject) {
 }
 
 function createTasks(whichView) {
+	
 	//This is the base GitHub API URL for the CCDH group
 	var url = "https://api.github.com/repos/cancerDHC/";
-	//var url = "https://api.github.com/repos/jen-martin/"; //test
 	
-	// These are the GitHub repo names to get issues from
-	var repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools" ];
-	if (whichView == 'streamlined') {
-		repos = ["community-development", "data-model-harmonization", "Terminology", "tools" ];
+	// These are the GitHub repos to get issues from
+	var allRepos = [
+		{name: "operations", data_pages: 1},
+		{name: "community-development", data_pages: 1},
+		{name: "data-model-harmonization", data_pages: 1},
+		{name: "Terminology", data_pages: 1},
+		{name: "tools", data_pages: 1}
+	];
 	
+	//check how many issues are in each repo. Max is 100 per "page" of results.
+	//send each call to each repo asynchronously and wait for them all to finish
+	var issuePromises = [];
+	for(var i = 0; i < allRepos.length; i++) {
+		var p = new Promise(function(resolve, reject){checkRepoPagination(allRepos[i], url, resolve, reject);});
+		issuePromises.push(p);
 	}
+	//wait till all async calls have finihsed to continue getting data
+	Promise.all(issuePromises).then(function() {
+		//console.log('all promises executed for getting GH issue pagination');
+
+		// limit repos to get issues from based on the View the user has selected
+		if (whichView == 'streamlined') {
+			var repos = ["community-development", "data-model-harmonization", "Terminology", "tools" ];
 		
-	//writeGanttDataFile();
-	var alltasks = [];
+		} else {
+			var repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools" ];
+		}
+			
+		//writeGanttDataFile();
+		var alltasks = [];
 
-	//sent each call to each repo asynchronously and wait for them all to finish
-	var promises = [];
-	for(var i = 0; i < repos.length; i++) {
-		var p = new Promise(function(resolve, reject){getRequest(repos[i], url, alltasks, resolve, reject);});
-		promises.push(p);
-	}
-	Promise.all(promises).then(function() {
-		console.log('all promises executed');
-
-		var tasks = sortTasks(alltasks); 
-		//console.log(tasks);
-
-		var gantt = new Gantt(".gantt-target", tasks, {
-			//create a custom pop-up with the task URL
-			custom_popup_html: function(task) {
-			  return `
-				<div class="details-container">
-				  <div class="title">${task.name}</div>
-				  <div class="subtitle">
-				  Due: ${task.end} &nbsp;&nbsp;&nbsp;&nbsp; ${task.progress}% Complete<br />
-				  <a href=${task.url} target="_blank">${task.url}</a>
-				  </div>
-				</div>
-			  `;
+		//send each call to each repo asynchronously and wait for them all to finish
+		var dataPromises = [];
+		for(var i = 0; i < repos.length; i++) {
+			//check which repo to get and how many pages of results
+			var npages = allRepos.find(x => x.name === repos[i]).data_pages;
+			for (var j = 0; j < npages; j++) {
+				var p = new Promise(function(resolve, reject){getRequest(repos[i], url, npages, alltasks, resolve, reject);});
+				dataPromises.push(p);
 			}
-		});
-		//sets the default view mode
-		gantt.change_view_mode('Month');
-		
-		//change view mode dynamically
-		$(function() {
-			$(".btn-group").on("click", "button", function() {
-				$btn = $(this);
-				var mode = $btn.text();
-				gantt.change_view_mode(mode);
-				$btn.parent().find('button').removeClass('active');
-				$btn.addClass('active');
+		}
+		Promise.all(dataPromises).then(function() {
+			//console.log('all promises executed for collecting issue data');
+			var tasks = sortTasks(alltasks); 
+			//console.log(tasks);
+
+			var gantt = new Gantt(".gantt-target", tasks, {
+				//create a custom pop-up with the task URL
+				custom_popup_html: function(task) {
+				  return `
+					<div class="details-container">
+					  <div class="title">${task.name}</div>
+					  <div class="subtitle">
+					  Due: ${task.end} &nbsp;&nbsp;&nbsp;&nbsp; ${task.progress}% Complete<br />
+					  <a href=${task.url} target="_blank">${task.url}</a>
+					  </div>
+					</div>
+				  `;
+				}
 			});
+			//sets the default view mode
+			gantt.change_view_mode('Month');
+			
+			//change view mode dynamically
+			$(function() {
+				$(".btn-group").on("click", "button", function() {
+					$btn = $(this);
+					var mode = $btn.text();
+					gantt.change_view_mode(mode);
+					$btn.parent().find('button').removeClass('active');
+					$btn.addClass('active');
+				});
+			});
+			
+			
+			//console.log(tasks);
 		});
-		
-		
-		//console.log(tasks);
-	});	
+	});
 }
 createTasks('all');
