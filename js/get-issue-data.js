@@ -309,12 +309,6 @@ function getParent(title, labels) {
 function sortTasks(alltasks) {
 	var sortedTasks = [];
 
-	//calculate completion by Phase
-	var phaseNames = ['Phase 1','Phase 2','Phase 3','Phase 4'];
-	var phaseCompleteNum = [];
-	var phaseCompleteDen = [];
-	var phaseProgress = [];
-	
 	
 	for (let i in alltasks) {
 		item = [];
@@ -330,9 +324,11 @@ function sortTasks(alltasks) {
 		//set the color code for the progress bar
 		item.custom_class = alltasks[i].repo;
 		item.phase = alltasks[i].phase;
+		//TODO: sort into phases before further sorting
 		sortedTasks.push(item);
 	}
 
+	//sort tasks by phase
 	sortedTasks.sort((a, b) => (a.phase > b.phase) ? 1 : -1);
 	return sortedTasks;
 }
@@ -561,6 +557,9 @@ function createTasks(whichView) {
 			//console.log(tasks);
 
 			var gantt = new Gantt(".gantt-target", tasks, {
+				//turn off editing
+				draggable: false,
+    			hasArrows: false,
 				//create a custom pop-up with the task URL
 				custom_popup_html: function(task) {
 				  return `
