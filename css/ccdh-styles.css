@@ -12,8 +12,20 @@
 			border: 2px solid #f5f5f5;
 			overflow: scroll;
 		}
+
+		/* style for popup */
+		.gantt-container .popup-wrapper .popup_head {
+			padding-top: 3px;
+    		padding-bottom: 3px;
+    		padding-right: 10px;
+    		padding-left: 10px;
+    		font-weight: bold;
+    		background-color: #a3a3ff;
+    		color: #333333;
+		}
 		.gantt-container .popup-wrapper .title {
-			font-weight: bold;
+			/* border-bottom-width: 1px; */
+			font-weight: normal; 
 			color: #dfe2e5;
 		}
 		/* style for GitHub link in the pop-up */

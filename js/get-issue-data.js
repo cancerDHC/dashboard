@@ -323,6 +323,8 @@ function sortTasks(alltasks) {
 		item.url = alltasks[i].url;
 		//set the color code for the progress bar
 		item.custom_class = alltasks[i].repo;
+		//sets the group ID
+		item.group_id = alltasks[i].group_id;
 		item.phase = alltasks[i].phase;
 		//TODO: sort into phases before further sorting
 		sortedTasks.push(item);
@@ -487,6 +489,8 @@ function getRequest(repo, url, npages, alltasks, resolve, reject) {
 						 'dependencies': getGanttDependencies(data[i].body,repo),
 						 //get the GitHub issue URL so we can link to it in the pop-up
 						 'url': data[i].html_url,
+						 //group name
+						 'group_id': repo,
 						 //repo name
 						 'repo': repo,
 						 //parent item
@@ -560,11 +564,40 @@ function createTasks(whichView) {
 				//turn off editing
 				draggable: false,
     			hasArrows: false,
+    			//create custom groupings
+    			groups: [
+					{
+						id: 'operations',
+						name: 'Operations',
+						bar_class: 'bar-ops'
+					},
+					{
+						id: 'community-development',
+						name: 'Community Development Workstream',
+						bar_class: 'bar-cd'
+					},
+					{
+						id: 'data-model-harmonization',
+						name: 'Data Model Harmonization Workstream',
+						bar_class: 'bar-dmh'
+					},
+					{
+						id: 'Terminology',
+						name: 'Ontology and Terminology Ecosystem Workstream',
+						bar_class: 'bar-term'
+					},
+					{
+						id: 'tools',
+						name: 'Tools and Data Quality Workstream',
+						bar_class: 'bar-tools'
+					}
+				],
 				//create a custom pop-up with the task URL
 				custom_popup_html: function(task) {
 				  return `
 					<div class="details-container">
-					  <div class="title">${task.name}</div>
+					  <div class="popup_head">${task._group.name}</div>
+					  <div class="title" style="border-bottom: 1px solid #a3a3ff;">${task.name}</div>
 					  <div class="subtitle">
 					  Due: ${task.end} &nbsp;&nbsp;&nbsp;&nbsp; ${task.progress}% Complete<br />
 					  <a href=${task.url} target="_blank">${task.url}</a>
@@ -573,6 +606,10 @@ function createTasks(whichView) {
 				  `;
 				}
 			});
+			// deletes extra blank space at bottom of chart
+			var new_height = gantt.$svg.getAttribute('height') - 100;
+			gantt.$svg.setAttribute('height', new_height);
+		
 			//sets the default view mode
 			gantt.change_view_mode('Month');
 			
