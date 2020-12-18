@@ -309,6 +309,13 @@ function getParent(title, labels) {
 function sortTasks(alltasks) {
 	var sortedTasks = [];
 
+	// tasks for each repo
+	var opsTasks = [];
+	var commTasks = [];
+	var toolsTasks = [];
+	var termTasks = [];
+	var modelTasks =[];
+
 	
 	for (let i in alltasks) {
 		item = [];
@@ -324,14 +331,40 @@ function sortTasks(alltasks) {
 		//set the color code for the progress bar
 		item.custom_class = alltasks[i].repo;
 		//sets the group ID
-		item.group_id = alltasks[i].group_id;
+		let group = alltasks[i].group_id;
+		item.group_id = group;
+		
+		//sort into task groups
+		if (group.localeCompare("operations") == 0) {
+			opsTasks.push(item);
+		} else if (group.localeCompare("community-development") == 0) {
+			commTasks.push(item);
+		} else if (group.localeCompare("data-model-harmonization") == 0) {
+			modelTasks.push(item);
+		} else if (group.localeCompare("Terminology") == 0) {
+			termTasks.push(item);
+		} else if (group.localeCompare("tools") == 0) {
+			toolsTasks.push(item);
+		}
+
 		item.phase = alltasks[i].phase;
-		//TODO: sort into phases before further sorting
-		sortedTasks.push(item);
+
+		//wait to push operations tasks until all others are sorted
+		if (group.localeCompare("operations") !== 0) {
+			sortedTasks.push(item);
+		}
 	}
 
-	//sort tasks by phase
-	sortedTasks.sort((a, b) => (a.phase > b.phase) ? 1 : -1);
+	//sort tasks by start date
+	sortedTasks.sort((a, b) => (a.start > b.start) ? 1 : -1);
+
+	//sort operations tasks by date
+	opsTasks.sort((a, b) => (a.start > b.start) ? 1 : -1);
+	//add operations tasks to end of task list
+	for (let i in opsTasks) {
+		sortedTasks.push(opsTasks[i]);
+	}
+
 	return sortedTasks;
 }
 
