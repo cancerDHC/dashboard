@@ -196,32 +196,6 @@ function getGanttDate(milestone, opt, title) {
 	return date;
 }
 
-// Gets the task phase
-function getPhase(milestone, title) {
-	var phase = '';
-	if (milestone != null) {
-		if (milestone.title != null) {
-			var str = milestone.title.toLowerCase();
-			if (str.search("phase 2") >= 0) {
-				if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
-					phase = 'Phase 2.1';
-				} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
-					phase = 'Phase 2.2';
-				} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
-					phase = 'Phase 2.3';
-				} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
-					phase = 'Phase 2.4';
-				} else {
-					phase = 'Phase 2.0';
-				}
-			}
-		}
-	} else {
-		//infer phase from title if possible
-	}
-	return phase;
-}
-
 //Calculates the task completion percentage
 function getGanttProgress(bodyText, status) {
 	var progress = 0; 
@@ -316,6 +290,9 @@ function sortTasks(alltasks) {
 	var termTasks = [];
 	var modelTasks =[];
 
+	//undated tasks
+	var undatedTasks =[];
+
 	
 	for (let i in alltasks) {
 		item = [];
@@ -334,25 +311,29 @@ function sortTasks(alltasks) {
 		let group = alltasks[i].group_id;
 		item.group_id = group;
 		
-		//sort into task groups
-		if (group.localeCompare("operations") == 0) {
-			opsTasks.push(item);
-		} else if (group.localeCompare("community-development") == 0) {
-			commTasks.push(item);
-		} else if (group.localeCompare("data-model-harmonization") == 0) {
-			modelTasks.push(item);
-		} else if (group.localeCompare("Terminology") == 0) {
-			termTasks.push(item);
-		} else if (group.localeCompare("tools") == 0) {
-			toolsTasks.push(item);
-		}
+		//extract tasks with no dates
+		if (item.start == "") {
+			undatedTasks.push(item);
+		} else {
+			//sort into task groups
+			if (group.localeCompare("operations") == 0) {
+				opsTasks.push(item);
+			} else if (group.localeCompare("community-development") == 0) {
+				commTasks.push(item);
+			} else if (group.localeCompare("data-model-harmonization") == 0) {
+				modelTasks.push(item);
+			} else if (group.localeCompare("Terminology") == 0) {
+				termTasks.push(item);
+			} else if (group.localeCompare("tools") == 0) {
+				toolsTasks.push(item);
+			}
 
-		item.phase = alltasks[i].phase;
-
-		//wait to push operations tasks until all others are sorted
-		if (group.localeCompare("operations") !== 0) {
-			sortedTasks.push(item);
+			//wait to push operations tasks until all others are sorted
+			if (group.localeCompare("operations") !== 0) {
+				sortedTasks.push(item);
+			}
 		}
+		
 	}
 
 	//sort tasks by start date
@@ -363,6 +344,11 @@ function sortTasks(alltasks) {
 	//add operations tasks to end of task list
 	for (let i in opsTasks) {
 		sortedTasks.push(opsTasks[i]);
+	}
+
+	//add udated tasks to very bottom
+	for (let i in undatedTasks) {
+		sortedTasks.push(undatedTasks[i]);
 	}
 
 	return sortedTasks;
@@ -528,8 +514,6 @@ function getRequest(repo, url, npages, alltasks, resolve, reject) {
 						 'repo': repo,
 						 //parent item
 						 'parent': getParent(data[i].title, data[i].labels),
-						 //project phase
-						 'phase': getPhase(data[i].milestone, data[i].title),
 					}];
 					alltasks.push(item[0]); 
 				}
