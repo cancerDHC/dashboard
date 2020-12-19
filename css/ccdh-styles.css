@@ -43,39 +43,54 @@
 		
 		/* styling for the legend DIV */
 		.colorcode div {padding: 3px; margin-bottom: 5px;} 
+
+		/*styling for the repo view buttons */
+		.chart-view div {padding: 3px; margin-bottom: 5px;} 
+		/* toggled off - button text is gray */
+		.chart-view .view {color: #999; border: none; margin-left: 0px; padding: 3px; border-radius: 5px; cursor: pointer;} 
+		/* basic styling to represent portion of incomplete task (outer button) */
+		.chart-view .viewbtn {margin: 0px; padding-top: 2px; padding-bottom: 2px; padding-left: 0px; padding-right: 10px; border-radius: 5px;}
+		/* toggled on - button text is white */
+		.chart-view .active {color: #fff;} 
+		/* button text is white in hover */
+		.chart-view .view:hover {color: #fff; } 
+		/* style on hover for outer button */
+		.chart-view .viewbtn:hover {color: #fff; border: 1px solid black; border-radius: 5px;} 
+		/* button outline on focus */
+		.chart-view button:focus{outline-style: solid; outline-color: gray;}
 		
 		/* custom color coding for each repo */
 		/* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
 		.gantt .tools .bar { fill: #999999; }
 		.gantt .tools .bar-progress { fill: #666666; }
 		/* color styles for the repo legend bar */
-		.cc-tools-incomplete{background-color: #999999; margin-left: 0px; padding: 3px 0px; border-radius: 5px;}
-		.cc-tools-complete {color: #fff; background-color: #666666; margin-left: 0px; padding: 3px; border-radius: 5px;}
+		.tools-bg {background-color: #999999; }
+		.chart-view .tools {background-color: #666666; }
 		
 		/* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
 		.gantt .data-model-harmonization .bar { fill: #aace71;}
 		.gantt .data-model-harmonization .bar-progress { fill: #758e4f; }
 		/* color styles for the repo legend bar */
-		.cc-dmh-incomplete {background-color: #aace71; margin-left: 0px; padding: 3px 0px; border-radius: 5px;}
-		.cc-dmh-complete {color: #fff; background-color: #758e4f;  margin-left: 0px; padding: 3px; border-radius: 5px;}
+		.dmh-bg {background-color: #aace71;}
+		.chart-view .dmh {background-color: #758e4f;}
 
 		/* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
 		.gantt .community-development .bar { fill: #6eb29d;}
 		.gantt .community-development .bar-progress { fill: #477164; }
 		/* color styles for the repo legend bar */
-		.cc-comdev-incomplete {background-color: #6eb29d; margin-left: 0px; padding: 3px 0px; border-radius: 5px;}
-		.cc-comdev-complete {color: #fff; background-color: #477164;  margin-left: 0px; padding: 3px; border-radius: 5px;}
+		.comdev-bg { background-color: #6eb29d;}
+		.chart-view .comdev {background-color: #477164;}
 
 		/* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
 		.gantt .Terminology .bar { fill: #76e7f2;}
 		.gantt .Terminology .bar-progress { fill: #60bdc6; }
 		/* color styles for the repo legend bar */
-		.cc-term-incomplete {background-color: #76e7f2; margin-left: 0px; padding: 3px 0px; border-radius: 5px;}
-		.cc-term-complete {color: #fff; background-color: #60bdc6;  margin-left: 0px; padding: 3px; border-radius: 5px;}
+		.term-bg {background-color: #76e7f2; }
+		.chart-view .term {background-color: #60bdc6;}
 
 		/* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
 		.gantt .operations .bar { fill: #00bbff;}
 		.gantt .operations .bar-progress { fill: #0099d5; }
 		/* color styles for the repo legend bar */
-		.cc-ops-incomplete {background-color: #00bbff; margin-left: 0px; padding: 3px 0px; border-radius: 5px;}
-		.cc-ops-complete {color: #fff; background-color: #0099d5;  margin-left: 0px; padding: 3px; border-radius: 5px;}
+		.ops-bg {background-color: #00bbff; }
+		.chart-view .ops {background-color: #0099d5;}

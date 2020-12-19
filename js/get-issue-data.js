@@ -526,12 +526,40 @@ function getRequest(repo, url, npages, alltasks, resolve, reject) {
 	  xhttp.send();
 }
 
-function createTasks(whichView) {
-	
+/* Gets list of repos to view in Gantt chart */
+function whichRepos(){
+	var activeRepos = [];
+	var el = $(".view.active").toArray();
+	for (let i in el) {
+		activeRepos.push(el[i].innerHTML);
+	}
+	return activeRepos;
+}
+
+function createTasks() {
+
 	//This is the base GitHub API URL for the CCDH group
 	var url = "https://api.github.com/repos/cancerDHC/";
+
+	//get list of selected repos
+	var selectedRepos = whichRepos();
+	//get GitHub repo names
+	var repos = [];
+	for (let i in selectedRepos) {
+		if (selectedRepos[i] == "Community Development") {
+			repos.push("community-development");
+		} else if (selectedRepos[i] == "Data Model Harmonization") {
+			repos.push("data-model-harmonization");
+		} else if (selectedRepos[i] == "Terminology") {
+			repos.push("Terminology");
+		} else if (selectedRepos[i] == "Tools") {
+			repos.push("tools");
+		} else if (selectedRepos[i] == "Operations") {
+			repos.push("operations");
+		} 
+	}
 	
-	// These are the GitHub repos to get issues from
+	// These are all the CCDH GitHub repos to get issues from
 	var allRepos = [
 		{name: "operations", data_pages: 1},
 		{name: "community-development", data_pages: 1},
@@ -550,14 +578,6 @@ function createTasks(whichView) {
 	//wait till all async calls have finihsed to continue getting data
 	Promise.all(issuePromises).then(function() {
 		//console.log('all promises executed for getting GH issue pagination');
-
-		// limit repos to get issues from based on the View the user has selected
-		if (whichView == 'streamlined') {
-			var repos = ["community-development", "data-model-harmonization", "Terminology", "tools" ];
-		
-		} else {
-			var repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools" ];
-		}
 			
 		//writeGanttDataFile();
 		var alltasks = [];
@@ -629,21 +649,9 @@ function createTasks(whichView) {
 		
 			//sets the default view mode
 			gantt.change_view_mode('Month');
-			
-			//change view mode dynamically
-			$(function() {
-				$(".btn-group").on("click", "button", function() {
-					$btn = $(this);
-					var mode = $btn.text();
-					gantt.change_view_mode(mode);
-					$btn.parent().find('button').removeClass('active');
-					$btn.addClass('active');
-				});
-			});
-			
-			
+
 			//console.log(tasks);
 		});
 	});
 }
-createTasks('all');
+createTasks();
