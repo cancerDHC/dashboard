@@ -249,51 +249,18 @@ function getGanttDependencies(bodyText, repoName) {
 	return dependencies;
 }
 
-//determine the item's level from the title
-//or label
-function getParent(title, labels) {
-	var parent = '';
-	//first check title
-	var str = title.trim().toLowerCase();
-	str = str.split(' ')[0]; //get first "word" in the title
-	var patt1 = /^\d[a-z]/; //starts with digit-letter
-	var patt2 = /^\d[a-z]\d/; //starts with digit-letter-digit
-	var patt3 = /^\d[a-z]\d[a-z]/; //starts with digit-letter-digit-letter
-	if (patt1.test(str)) {
-		//starts with digit-letter
-		if (patt3.test(str)) {
-			//starts with digit-letter-digit-letter
-			parent = str.substring(0, 3);
-		} else if (patt2.test(str)) {
-			//starts with digit-letter-digit
-			parent = str.substring(0, 2);
-		} else {
-			parent = str.substring(0, 1);
-		}
-	} else {
-		// TO DO - try label
-		
-	}
-	//console.log(title, labels, parent);
-	return parent;
-}
-
-
 //sort tasks
 function sortTasks(alltasks) {
 	var sortedTasks = [];
 
-	// tasks for each repo
+	// separate out operations tasks
 	var opsTasks = [];
-	var commTasks = [];
-	var toolsTasks = [];
-	var termTasks = [];
-	var modelTasks =[];
-
-	//undated tasks
+	// separate out tasks without GH milestone and/or defined start/end date
 	var undatedTasks =[];
 
-	
+	//get list of which repos to show
+	var activeRepos = whichRepos();
+
 	for (let i in alltasks) {
 		item = [];
 		item.id = alltasks[i].id;
@@ -315,21 +282,11 @@ function sortTasks(alltasks) {
 		if (item.start == "") {
 			undatedTasks.push(item);
 		} else {
-			//sort into task groups
-			if (group.localeCompare("operations") == 0) {
+			if (group == "operations") {
+				//separate out operations tasks
 				opsTasks.push(item);
-			} else if (group.localeCompare("community-development") == 0) {
-				commTasks.push(item);
-			} else if (group.localeCompare("data-model-harmonization") == 0) {
-				modelTasks.push(item);
-			} else if (group.localeCompare("Terminology") == 0) {
-				termTasks.push(item);
-			} else if (group.localeCompare("tools") == 0) {
-				toolsTasks.push(item);
-			}
-
-			//wait to push operations tasks until all others are sorted
-			if (group.localeCompare("operations") !== 0) {
+			} else if (activeRepos.includes(group)) {
+				// only push to task list if user has not delesected it
 				sortedTasks.push(item);
 			}
 		}
@@ -339,17 +296,19 @@ function sortTasks(alltasks) {
 	//sort tasks by start date
 	sortedTasks.sort((a, b) => (a.start > b.start) ? 1 : -1);
 
-	//sort operations tasks by date
-	opsTasks.sort((a, b) => (a.start > b.start) ? 1 : -1);
-	//add operations tasks to end of task list
-	for (let i in opsTasks) {
-		sortedTasks.push(opsTasks[i]);
+	if (activeRepos.includes("operations")) {
+		//sort operations tasks by date
+		opsTasks.sort((a, b) => (a.start > b.start) ? 1 : -1);
+		//add operations tasks to end of task list
+		for (let i in opsTasks) {
+			sortedTasks.push(opsTasks[i]);
+		}
 	}
 
 	//add udated tasks to very bottom
-	for (let i in undatedTasks) {
-		sortedTasks.push(undatedTasks[i]);
-	}
+	//for (let i in undatedTasks) {
+	//	sortedTasks.push(undatedTasks[i]);
+	//}
 
 	return sortedTasks;
 }
@@ -512,8 +471,6 @@ function getRequest(repo, url, npages, alltasks, resolve, reject) {
 						 'group_id': repo,
 						 //repo name
 						 'repo': repo,
-						 //parent item
-						 'parent': getParent(data[i].title, data[i].labels),
 					}];
 					alltasks.push(item[0]); 
 				}
@@ -527,11 +484,23 @@ function getRequest(repo, url, npages, alltasks, resolve, reject) {
 }
 
 /* Gets list of repos to view in Gantt chart */
+/* and returns array of GH repo names */
 function whichRepos(){
 	var activeRepos = [];
 	var el = $(".view.active").toArray();
 	for (let i in el) {
-		activeRepos.push(el[i].innerHTML);
+		let str = el[i].innerHTML;
+		if (str == "Community Development") {
+			activeRepos.push("community-development");
+		} else if (str == "Data Model Harmonization") {
+			activeRepos.push("data-model-harmonization");
+		} else if (str == "Terminology") {
+			activeRepos.push("Terminology");
+		} else if (str == "Tools") {
+			activeRepos.push("tools");
+		} else if (str == "Operations") {
+			activeRepos.push("operations");
+		}
 	}
 	return activeRepos;
 }
@@ -542,22 +511,7 @@ function createTasks() {
 	var url = "https://api.github.com/repos/cancerDHC/";
 
 	//get list of selected repos
-	var selectedRepos = whichRepos();
-	//get GitHub repo names
-	var repos = [];
-	for (let i in selectedRepos) {
-		if (selectedRepos[i] == "Community Development") {
-			repos.push("community-development");
-		} else if (selectedRepos[i] == "Data Model Harmonization") {
-			repos.push("data-model-harmonization");
-		} else if (selectedRepos[i] == "Terminology") {
-			repos.push("Terminology");
-		} else if (selectedRepos[i] == "Tools") {
-			repos.push("tools");
-		} else if (selectedRepos[i] == "Operations") {
-			repos.push("operations");
-		} 
-	}
+	var repos = whichRepos();
 	
 	// These are all the CCDH GitHub repos to get issues from
 	var allRepos = [
@@ -571,7 +525,7 @@ function createTasks() {
 	//check how many issues are in each repo. Max is 100 per "page" of results.
 	//send each call to each repo asynchronously and wait for them all to finish
 	var issuePromises = [];
-	for(var i = 0; i < allRepos.length; i++) {
+	for(let i in allRepos) {
 		var p = new Promise(function(resolve, reject){checkRepoPagination(allRepos[i], url, resolve, reject);});
 		issuePromises.push(p);
 	}
@@ -584,11 +538,11 @@ function createTasks() {
 
 		//send each call to each repo asynchronously and wait for them all to finish
 		var dataPromises = [];
-		for(var i = 0; i < repos.length; i++) {
+		for(let i in allRepos) {
 			//check which repo to get and how many pages of results
-			var npages = allRepos.find(x => x.name === repos[i]).data_pages;
+			var npages = allRepos[i].data_pages;
 			for (var j = 0; j < npages; j++) {
-				var p = new Promise(function(resolve, reject){getRequest(repos[i], url, npages, alltasks, resolve, reject);});
+				var p = new Promise(function(resolve, reject){getRequest(allRepos[i].name, url, npages, alltasks, resolve, reject);});
 				dataPromises.push(p);
 			}
 		}
@@ -629,7 +583,8 @@ function createTasks() {
 						bar_class: 'bar-tools'
 					}
 				],
-				//create a custom pop-up with the task URL
+				
+				//create a custom pop-up with the task group name, URL, title and dates
 				custom_popup_html: function(task) {
 				  return `
 					<div class="details-container">
@@ -643,12 +598,37 @@ function createTasks() {
 				  `;
 				}
 			});
+			
 			// deletes extra blank space at bottom of chart
 			var new_height = gantt.$svg.getAttribute('height') - 100;
 			gantt.$svg.setAttribute('height', new_height);
 		
 			//sets the default view mode
 			gantt.change_view_mode('Month');
+
+			//change view mode dynamically
+			$(function() {
+				$(".timeline-view").on("click", "button", function() {
+					$btn = $(this);
+					var mode = $btn.text();
+					gantt.change_view_mode(mode);
+					$btn.parent().find('button').removeClass('active');
+					$btn.addClass('active');
+				});
+			});
+
+			//toggle workstream tasks dynamically
+			$(function() {
+				$(".chart-view").on("click", "button", function() {
+					$btn = $(this);
+					var ws = $btn.text();
+					$btn.toggleClass("active");
+
+					//re-sort tasks to show/hide selected workstreams
+					tasks = sortTasks(alltasks);
+					gantt.refresh(tasks);
+				});
+			});
 
 			//console.log(tasks);
 		});

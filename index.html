@@ -27,28 +27,5 @@
 	</div>
 
 	<script src="js/get-issue-data.js"></script>
-	<script>
-		//change view mode dynamically
-		$(function() {
-			$(".timeline-view").on("click", "button", function() {
-				$btn = $(this);
-				var mode = $btn.text();
-				gantt.change_view_mode(mode);
-				$btn.parent().find('button').removeClass('active');
-				$btn.addClass('active');
-			});
-		});
-
-		//toggle workstream tasks dynamically
-		$(function() {
-			$(".chart-view").on("click", "button", function() {
-				$btn = $(this);
-				var ws = $btn.text();
-				$btn.toggleClass("active");
-
-				//re-get tickets
-			});
-		});
-	</script>
 </body>
 </html>
