@@ -196,32 +196,6 @@ function getGanttDate(milestone, opt, title) {
 	return date;
 }
 
-// Gets the task phase
-function getPhase(milestone, title) {
-	var phase = '';
-	if (milestone != null) {
-		if (milestone.title != null) {
-			var str = milestone.title.toLowerCase();
-			if (str.search("phase 2") >= 0) {
-				if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
-					phase = 'Phase 2.1';
-				} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
-					phase = 'Phase 2.2';
-				} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
-					phase = 'Phase 2.3';
-				} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
-					phase = 'Phase 2.4';
-				} else {
-					phase = 'Phase 2.0';
-				}
-			}
-		}
-	} else {
-		//infer phase from title if possible
-	}
-	return phase;
-}
-
 //Calculates the task completion percentage
 function getGanttProgress(bodyText, status) {
 	var progress = 0; 
@@ -275,41 +249,18 @@ function getGanttDependencies(bodyText, repoName) {
 	return dependencies;
 }
 
-//determine the item's level from the title
-//or label
-function getParent(title, labels) {
-	var parent = '';
-	//first check title
-	var str = title.trim().toLowerCase();
-	str = str.split(' ')[0]; //get first "word" in the title
-	var patt1 = /^\d[a-z]/; //starts with digit-letter
-	var patt2 = /^\d[a-z]\d/; //starts with digit-letter-digit
-	var patt3 = /^\d[a-z]\d[a-z]/; //starts with digit-letter-digit-letter
-	if (patt1.test(str)) {
-		//starts with digit-letter
-		if (patt3.test(str)) {
-			//starts with digit-letter-digit-letter
-			parent = str.substring(0, 3);
-		} else if (patt2.test(str)) {
-			//starts with digit-letter-digit
-			parent = str.substring(0, 2);
-		} else {
-			parent = str.substring(0, 1);
-		}
-	} else {
-		// TO DO - try label
-		
-	}
-	//console.log(title, labels, parent);
-	return parent;
-}
-
-
 //sort tasks
 function sortTasks(alltasks) {
 	var sortedTasks = [];
 
-	
+	// separate out operations tasks
+	var opsTasks = [];
+	// separate out tasks without GH milestone and/or defined start/end date
+	var undatedTasks =[];
+
+	//get list of which repos to show
+	var activeRepos = whichRepos();
+
 	for (let i in alltasks) {
 		item = [];
 		item.id = alltasks[i].id;
@@ -323,13 +274,42 @@ function sortTasks(alltasks) {
 		item.url = alltasks[i].url;
 		//set the color code for the progress bar
 		item.custom_class = alltasks[i].repo;
-		item.phase = alltasks[i].phase;
-		//TODO: sort into phases before further sorting
-		sortedTasks.push(item);
+		//sets the group ID
+		let group = alltasks[i].group_id;
+		item.group_id = group;
+		
+		//extract tasks with no dates
+		if (item.start == "") {
+			undatedTasks.push(item);
+		} else {
+			if (group == "operations") {
+				//separate out operations tasks
+				opsTasks.push(item);
+			} else if (activeRepos.includes(group)) {
+				// only push to task list if user has not delesected it
+				sortedTasks.push(item);
+			}
+		}
+		
 	}
 
-	//sort tasks by phase
-	sortedTasks.sort((a, b) => (a.phase > b.phase) ? 1 : -1);
+	//sort tasks by start date
+	sortedTasks.sort((a, b) => (a.start > b.start) ? 1 : -1);
+
+	if (activeRepos.includes("operations")) {
+		//sort operations tasks by date
+		opsTasks.sort((a, b) => (a.start > b.start) ? 1 : -1);
+		//add operations tasks to end of task list
+		for (let i in opsTasks) {
+			sortedTasks.push(opsTasks[i]);
+		}
+	}
+
+	//add udated tasks to very bottom
+	//for (let i in undatedTasks) {
+	//	sortedTasks.push(undatedTasks[i]);
+	//}
+
 	return sortedTasks;
 }
 
@@ -487,12 +467,10 @@ function getRequest(repo, url, npages, alltasks, resolve, reject) {
 						 'dependencies': getGanttDependencies(data[i].body,repo),
 						 //get the GitHub issue URL so we can link to it in the pop-up
 						 'url': data[i].html_url,
+						 //group name
+						 'group_id': repo,
 						 //repo name
 						 'repo': repo,
-						 //parent item
-						 'parent': getParent(data[i].title, data[i].labels),
-						 //project phase
-						 'phase': getPhase(data[i].milestone, data[i].title),
 					}];
 					alltasks.push(item[0]); 
 				}
@@ -505,12 +483,37 @@ function getRequest(repo, url, npages, alltasks, resolve, reject) {
 	  xhttp.send();
 }
 
-function createTasks(whichView) {
-	
+/* Gets list of repos to view in Gantt chart */
+/* and returns array of GH repo names */
+function whichRepos(){
+	var activeRepos = [];
+	var el = $(".view.active").toArray();
+	for (let i in el) {
+		let str = el[i].innerHTML;
+		if (str == "Community Development") {
+			activeRepos.push("community-development");
+		} else if (str == "Data Model Harmonization") {
+			activeRepos.push("data-model-harmonization");
+		} else if (str == "Terminology") {
+			activeRepos.push("Terminology");
+		} else if (str == "Tools") {
+			activeRepos.push("tools");
+		} else if (str == "Operations") {
+			activeRepos.push("operations");
+		}
+	}
+	return activeRepos;
+}
+
+function createTasks() {
+
 	//This is the base GitHub API URL for the CCDH group
 	var url = "https://api.github.com/repos/cancerDHC/";
+
+	//get list of selected repos
+	var repos = whichRepos();
 	
-	// These are the GitHub repos to get issues from
+	// These are all the CCDH GitHub repos to get issues from
 	var allRepos = [
 		{name: "operations", data_pages: 1},
 		{name: "community-development", data_pages: 1},
@@ -522,32 +525,24 @@ function createTasks(whichView) {
 	//check how many issues are in each repo. Max is 100 per "page" of results.
 	//send each call to each repo asynchronously and wait for them all to finish
 	var issuePromises = [];
-	for(var i = 0; i < allRepos.length; i++) {
+	for(let i in allRepos) {
 		var p = new Promise(function(resolve, reject){checkRepoPagination(allRepos[i], url, resolve, reject);});
 		issuePromises.push(p);
 	}
 	//wait till all async calls have finihsed to continue getting data
 	Promise.all(issuePromises).then(function() {
 		//console.log('all promises executed for getting GH issue pagination');
-
-		// limit repos to get issues from based on the View the user has selected
-		if (whichView == 'streamlined') {
-			var repos = ["community-development", "data-model-harmonization", "Terminology", "tools" ];
-		
-		} else {
-			var repos = ["operations", "community-development", "data-model-harmonization", "Terminology", "tools" ];
-		}
 			
 		//writeGanttDataFile();
 		var alltasks = [];
 
 		//send each call to each repo asynchronously and wait for them all to finish
 		var dataPromises = [];
-		for(var i = 0; i < repos.length; i++) {
+		for(let i in allRepos) {
 			//check which repo to get and how many pages of results
-			var npages = allRepos.find(x => x.name === repos[i]).data_pages;
+			var npages = allRepos[i].data_pages;
 			for (var j = 0; j < npages; j++) {
-				var p = new Promise(function(resolve, reject){getRequest(repos[i], url, npages, alltasks, resolve, reject);});
+				var p = new Promise(function(resolve, reject){getRequest(allRepos[i].name, url, npages, alltasks, resolve, reject);});
 				dataPromises.push(p);
 			}
 		}
@@ -560,11 +555,41 @@ function createTasks(whichView) {
 				//turn off editing
 				draggable: false,
     			hasArrows: false,
-				//create a custom pop-up with the task URL
+    			//create custom groupings
+    			groups: [
+					{
+						id: 'operations',
+						name: 'Operations',
+						bar_class: 'bar-ops'
+					},
+					{
+						id: 'community-development',
+						name: 'Community Development Workstream',
+						bar_class: 'bar-cd'
+					},
+					{
+						id: 'data-model-harmonization',
+						name: 'Data Model Harmonization Workstream',
+						bar_class: 'bar-dmh'
+					},
+					{
+						id: 'Terminology',
+						name: 'Ontology and Terminology Ecosystem Workstream',
+						bar_class: 'bar-term'
+					},
+					{
+						id: 'tools',
+						name: 'Tools and Data Quality Workstream',
+						bar_class: 'bar-tools'
+					}
+				],
+				
+				//create a custom pop-up with the task group name, URL, title and dates
 				custom_popup_html: function(task) {
 				  return `
 					<div class="details-container">
-					  <div class="title">${task.name}</div>
+					  <div class="popup_head">${task._group.name}</div>
+					  <div class="title" style="border-bottom: 1px solid #a3a3ff;">${task.name}</div>
 					  <div class="subtitle">
 					  Due: ${task.end} &nbsp;&nbsp;&nbsp;&nbsp; ${task.progress}% Complete<br />
 					  <a href=${task.url} target="_blank">${task.url}</a>
@@ -573,12 +598,17 @@ function createTasks(whichView) {
 				  `;
 				}
 			});
+			
+			// deletes extra blank space at bottom of chart
+			var new_height = gantt.$svg.getAttribute('height') - 100;
+			gantt.$svg.setAttribute('height', new_height);
+		
 			//sets the default view mode
 			gantt.change_view_mode('Month');
-			
+
 			//change view mode dynamically
 			$(function() {
-				$(".btn-group").on("click", "button", function() {
+				$(".timeline-view").on("click", "button", function() {
 					$btn = $(this);
 					var mode = $btn.text();
 					gantt.change_view_mode(mode);
@@ -586,10 +616,22 @@ function createTasks(whichView) {
 					$btn.addClass('active');
 				});
 			});
-			
-			
+
+			//toggle workstream tasks dynamically
+			$(function() {
+				$(".chart-view").on("click", "button", function() {
+					$btn = $(this);
+					var ws = $btn.text();
+					$btn.toggleClass("active");
+
+					//re-sort tasks to show/hide selected workstreams
+					tasks = sortTasks(alltasks);
+					gantt.refresh(tasks);
+				});
+			});
+
 			//console.log(tasks);
 		});
 	});
 }
-createTasks('all');
+createTasks();

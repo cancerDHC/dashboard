@@ -10,25 +10,16 @@
 </head>
 <body>
 	<div class="container">
-		<h2>CCDH Project Task Dashboard</h2> 
-		<!-- 
+		<h2>CCDH Project Task Dashboard</h2>  
 		<div class="chart-view" role="group">
-		  View:
-		  <button type="button" onclick="createTasks('all')" class="view active">All Tickets</button>
-		  <button type="button" onclick="createTasks('streamlined')"class="view">Streamlined</button>
-		  <button type="button" class="view">Summary</button>
-		</div>
-	    -->
-		<div class="colorcode">
-		Legend: 
-		<span class="cc-ops-incomplete"><span class="cc-ops-complete">Operations</span>&nbsp; &nbsp;</span>
-		<span class="cc-comdev-incomplete"><span class="cc-comdev-complete">Community Development</span>&nbsp; &nbsp;</span>
-		<span class="cc-dmh-incomplete"><span class="cc-dmh-complete">Data Model Harmonization</span>&nbsp; &nbsp;</span>
-		<span class="cc-term-incomplete"><span class="cc-term-complete">Terminology</span>&nbsp; &nbsp;</span>
-		<span class="cc-tools-incomplete"><span class="cc-tools-complete">Tools</span>&nbsp; &nbsp;</span>
+		  <span class="comdev-bg viewbtn"><button type="button" class="view active comdev">Community Development</button>&nbsp; &nbsp;</span>
+		  <span class="dmh-bg viewbtn"><button type="button" class="view active dmh">Data Model Harmonization</button>&nbsp; &nbsp;</span>
+		  <span class="term-bg viewbtn"><button type="button" class="view active term">Terminology</button>&nbsp; &nbsp;</span>
+		  <span class="tools-bg viewbtn"><button type="button" class="view active tools">Tools</button>&nbsp; &nbsp;</span>
+		  <span class="ops-bg viewbtn"><button type="button" class="view active ops">Operations</button>&nbsp; &nbsp;</span>
 		</div>
 		<div class="gantt-target"></div>
-		<div class="btn-group" role="group">
+		<div class="timeline-view" role="group">
 		  <button type="button" class="btn active">Month</button>
 		  <button type="button" class="btn">Year</button>
 		</div>
