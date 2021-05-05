@@ -12,3 +12,4 @@ Tools and Data Quality | https://github.com/cancerDHC/tools/issues
 
 This visualation tool is based on Frappe Gantt (https://frappe.io/gantt) an open source JS library for creating Gantt charts.
 
+The dashboard can be viewed at https://cancerdhc.github.io/
