@@ -10,6 +10,6 @@ Data Model Harmonization | https://github.com/cancerDHC/data-model-harmonization
 Ontology and Terminology Ecosystem | https://github.com/cancerDHC/Terminology/issues
 Tools and Data Quality | https://github.com/cancerDHC/tools/issues
 
-This visualation tool is based on Frappe Gantt (https://frappe.io/gantt) an open source JS library for creating Gantt charts.
-
 The dashboard can be viewed at https://cancerdhc.github.io/dashboard
+
+The backbone of the app is based on a customized version of a Gantt chart visualation tool originally developed by [Frappe Gantt](https://frappe.io/gantt). The customized app can be found here: https://github.com/cancerDHC/frappe-gantt-custom-mod
