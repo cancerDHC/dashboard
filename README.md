@@ -1,6 +1,14 @@
 # GitHub Issue Dashboard for the Center for Cancer Data Harmonization Project
 
-This project creates a Gantt-chart style visualization to track progress made on the Center for Cancer Data Harmonization (CCDH) project. The CCDH project consists of five workstreams; each workstream logs progress on goals in a GitHub repo.
+This project creates a Gantt-chart style visualization to track progress made on the Center for Cancer Data Harmonization (CCDH) project's workstream GitHub tickets. 
+
+The live dashboard can be viewed at https://cancerdhc.github.io/dashboard. 
+
+![image](https://user-images.githubusercontent.com/67020823/121235870-2d6a2c00-c84a-11eb-88fc-6368bcfc6ac4.png)
+
+## Dashboard Data
+
+The CCDH project consists of five workstreams; each workstream logs progress on goals in a GitHub repo.
 
 Workstream Name | GitHub Repo URL
 --------------- | ---------------
@@ -10,6 +18,20 @@ Data Model Harmonization | https://github.com/cancerDHC/data-model-harmonization
 Ontology and Terminology Ecosystem | https://github.com/cancerDHC/Terminology/issues
 Tools and Data Quality | https://github.com/cancerDHC/tools/issues
 
-The dashboard can be viewed at https://cancerdhc.github.io/dashboard
+This app uses the GitHub API to get all issues from each workstream. GitHub tickets are placed on the chart timeline if:
+
+- the ticket has a Milestone that has a label containing the Phase and/or Quarter (e.g., "Phase 2 - Quarter 4")
+- the ticket is in the Operations repo and has a title indicating it is a deliverable (e.g., the title starts with "Del.E") or is a "high level" task (e.g., the title starts with the phase/task number such as "2a3")
+
+The percent completion for each ticket is calculated based on whether the ticket is open or closed (closed tickets are 100% complete) and, if present, the proportion of checkboxes that are checked vs. unchecked.
+
+## Features
+
+- Click on a task to show the task title, due date, percent completion status, and link to the GitHub ticket.
+- Show/hide each workstream's tickets by clicking on the workstream name at the top
+- The timeline can be expanded or compressed by clicking the "Month" or "Year" buttons at the bottom. The Month view shows a half dozen or so months in the window (depending on the size of the browser window); the Year view displays a half dozen or so years in the window.
+- The "Create TSV" button creates a comma delimited file of all GitHub tickets for all workstreams.
+
+## Development
 
 The backbone of the app is based on a customized version of a Gantt chart visualation tool originally developed by [Frappe Gantt](https://frappe.io/gantt). The customized app can be found here: https://github.com/cancerDHC/frappe-gantt-custom-mod
