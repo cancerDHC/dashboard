@@ -20,7 +20,10 @@ Tools and Data Quality | https://github.com/cancerDHC/tools/issues
 
 This app uses the GitHub API to get all issues from each workstream. GitHub tickets are placed on the chart timeline if:
 
-- the ticket has a Milestone that has a label containing the Phase and/or Quarter (e.g., "Phase 2 - Quarter 4")
+- the ticket has a Milestone that has a label indicating the Phase. The milestone label should contain the quarter the item is due (e.g., "Phase 2 - Quarter 4"; for end of Phase tickets, specify "Phase 2 - ENDS". If a quarter is not specified, the ticket will span the entire year. Note that Quarters refer to calendar quarters, not project quarters 
+  - Example: Phase 2 starts on 4/1/2020. A ticket due at the end of the first quarter of Phase 2 (three months after the start of Phase 2) would have a milestone labeled "Phase 2 - Quarter 2". On the timeline, it would begin on 4/1/2020 and end on 6/30/2020.
+  - Example: A ticket with the milestone "Phase 2 - ENDS" would be placed on the timeline starting on 4/1/2021 and ending on 5/31/2021.
+  - Example: A ticket with the milestone "Phase 2" would be placed on the timeline starting 4/1/2020 and end on 3/31/2021.  
 - the ticket is in the Operations repo and has a title indicating it is a deliverable (e.g., the title starts with "Del.E") or is a "high level" task (e.g., the title starts with the phase/task number such as "2a3")
 
 The percent completion for each ticket is calculated based on whether the ticket is open or closed (closed tickets are 100% complete) and, if present, the proportion of checkboxes that are checked vs. unchecked.

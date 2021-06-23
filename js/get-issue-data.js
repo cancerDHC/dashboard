@@ -18,9 +18,10 @@ function getGanttID(repoName, issueNumber){
 
 //Gets the task start or date from the GitHub issue
 //milestone. Milestone should contain the phase (e.g., 
-//"Phase 2") and quarter (e.g., "Quarter 2"). Note that 
-//each phase starts in quarter 2 (4/1) and ends in
-//quarter 1 of the next calendar year.
+//"Phase 2") and quarter (e.g., "Quarter 2"). Tickets
+//marked "ENDS" are truncated quarters, ending after two
+//monts. Note that each phase starts in quarter 2 (4/1) and 
+//ends in quarter 1 of the next calendar year.
 // opt = 0 gets the start date; opt = 1 gets the end date
 function getGanttDate(milestone, opt, title) {
 	var date = '';
@@ -39,6 +40,8 @@ function getGanttDate(milestone, opt, title) {
 						date = '2020-10-01';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2021-01-01';
+					} else if (str.search("ends") >= 0) {
+						date = '2021-04-01';
 					}
 				} else if (opt == 1) {
 					date = '2021-03-31'; // default is end of Phase 2
@@ -50,6 +53,8 @@ function getGanttDate(milestone, opt, title) {
 						date = '2020-12-31';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2021-03-31';
+					} else if (str.search("ends") >= 0) {
+						date = '2021-05-31';
 					}
 				}
 			} else if (str.search("phase 3") >= 0) {
@@ -64,6 +69,8 @@ function getGanttDate(milestone, opt, title) {
 						date = '2021-10-01';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2022-01-01';
+					} else if (str.search("ends") >= 0) {
+						date = '2022-04-01';
 					}
 				} else if (opt == 1) {
 					date = '2022-03-31'; // default is end of Phase 3
@@ -75,6 +82,8 @@ function getGanttDate(milestone, opt, title) {
 						date = '2021-12-31';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2022-03-31';
+					} else if (str.search("ends") >= 0) {
+						date = '2022-05-31';
 					}
 				}
 			} else if (str.search("phase 4") >= 0) {
@@ -89,6 +98,8 @@ function getGanttDate(milestone, opt, title) {
 						date = '2022-10-01';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2023-01-01';
+					} else if (str.search("ends") >= 0) {
+						date = '2023-04-01';
 					}
 				} else if (opt == 1) {
 					date = '2023-03-31'; // default is end of Phase 4
@@ -100,6 +111,8 @@ function getGanttDate(milestone, opt, title) {
 						date = '2022-12-31';
 					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2023-03-31';
+					} else if (str.search("ends") >= 0) {
+						date = '2023-05-31';
 					}
 				}
 			} else if (str.search("phase 1") >= 0) {
