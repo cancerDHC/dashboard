@@ -35,7 +35,7 @@ The percent completion for each ticket is calculated based on whether the ticket
 - The timeline can be expanded or compressed by clicking the "Month" or "Year" buttons at the bottom. The Month view shows a half dozen or so months in the window (depending on the size of the browser window); the Year view displays a half dozen or so years in the window.
 - The "Create TSV" button creates a comma delimited file of all GitHub tickets for all workstreams. (See "all_cccdh_issues.tsv" for example output.) Fields include a unique issue ID, the issue title, the start and end dates for the issue, percent completion status (0 to 100), a list of dependencies, and the issue's GitHub URL. 
 
-Note: Task dependencies can be created by simply referencing another GitHub issue ID in the body of the text (e.g., typing "#15" in the body text assumes issue #15 is a dependency). Task dependencies are not displayed in the Gantt chart; a lack of an option to sort related tickets made the display too complex. However, a list of dependencies for each ticket is output when the data are exported using the "Create TSV" button.
+Task dependencies can be created by simply referencing another GitHub issue ID in the body of the text (e.g., typing "#15" in the body text assumes issue #15 is a dependency). Task dependencies are not displayed in the Gantt chart; a lack of an option to sort related tickets made the display too complex. However, a list of dependencies for each ticket is output when the data are exported using the "Create TSV" button.
 
 ## Development
 
