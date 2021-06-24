@@ -1,80 +1,232 @@
 id	title	start_date	end_date	progress	dependencies	url
-'community-development Issue #18'	'support page - add content'	'2020-07-30T17:52:20Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/18
-'community-development Issue #16'	'create a page: Community Outreach (or a different name?)'	'2020-07-30T17:46:03Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/16
-'community-development Issue #15'	'add DMH info to Standards and Tooling page'	'2020-07-30T17:37:46Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/15
-'community-development Issue #13'	'home page needs a banner'	'2020-07-30T17:28:27Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/13
-'community-development Issue #11'	'add link outs to homepages for team members'	'2020-07-30T17:22:43Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/11
-'community-development Issue #9'	'Summit with the CDA team'	'2019-12-18T19:57:34Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/9
-'community-development Issue #8'	'Finalize FAQ doc for web portal'	'2020-04-21T20:31:28Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/8
-'community-development Issue #7'	'IDC reports 84 distinct elements - would like a list of these'	'2019-12-19T00:10:11Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/7
-'community-development Issue #6'	'Create an org chart of the CRDC'	'2020-07-13T18:11:03Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/6
-'community-development Issue #3'	'create/disseminate Q3 newsletter '	'2020-07-13T18:31:47Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/3
-'community-development Issue #2'	'create a CDA / CCDH Engagement Plan'	'2020-07-13T18:36:51Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/2
-'community-development Issue #1'	'Create and coordinate user lists across methods of communication and within CRDC (ongoing)'	'2020-07-13T18:52:57Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/community-development/issues/1
-'tools Issue #7'	'Incorporate ontologies into DICOM SNOMED to NCIt mapping'	'2020-08-11T14:52:08Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/tools/issues/7
-'tools Issue #5'	'Implement boomer workflow for data model harmonization'	'2020-08-01T14:33:02Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/tools/issues/5
-'tools Issue #4'	'Build a workflow for integrating example IDC data against standardized vocabularies'	'2020-07-15T21:58:38Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/tools/issues/4
-'tools Issue #3'	'Choose a format for publishing mappings'	'2020-06-08T18:56:41Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/tools/issues/3
-'tools Issue #2'	'review of CDS data and think about how it would be used to inform the requirements'	'2020-03-03T23:03:05Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/tools/issues/2
-'Terminology Issue #20'	'Value set and mapping versioning'	'2020-08-05T14:27:56Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/20
-'Terminology Issue #19'	'Perform mapping process'	'2020-08-05T14:26:58Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/19
-'Terminology Issue #18'	'Determine mapping environment'	'2020-08-05T14:25:52Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/18
-'Terminology Issue #17'	'Continue TCCM Implementation'	'2020-08-05T14:22:12Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/17
-'Terminology Issue #16'	'Begin TCCM implementation'	'2020-08-05T14:12:44Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/16
-'Terminology Issue #15'	'Complete TCCM Model definition'	'2020-08-05T14:11:05Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/15
-'Terminology Issue #14'	'Add value set validation capability to Shape Expressions'	'2020-08-05T14:09:26Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/14
-'Terminology Issue #13'	'Complete the value set modeling support in BiolinkML'	'2020-08-05T14:08:33Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/13
-'Terminology Issue #12'	'Determine representational model for maps'	'2020-08-05T14:03:50Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/12
-'Terminology Issue #11'	'Define the representational model for value sets'	'2020-08-05T14:02:55Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/11
-'Terminology Issue #10'	'Determine how to represent caDSR "intensional" value sets as FHIR value sets for mapping purposes'	'2020-08-05T14:00:11Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/10
-'Terminology Issue #9'	'Represent value sets as FHIR value sets'	'2020-08-05T13:57:23Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/9
-'Terminology Issue #8'	'Assemble existing value sets in tabular format'	'2020-08-05T13:54:29Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/8
-'Terminology Issue #7'	'Terminology WS requirement for Appendix A: "Phase I: Planning" missing from project folders.  What reference should the Terminology WS be using?'	'2020-01-02T18:32:44Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/7
-'Terminology Issue #6'	'SNOMED CT in DICOM subtasks (4): Determine if the IDC has current or future use cases which may leverage portions of SNOMED CT in DICOM superset'	'2019-12-26T17:00:31Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/6
-'Terminology Issue #5'	'SNOMED CT in DICOM subtask (3): 3.	Determine what DICOM specifications utilize SNOMED CT in any form (SNOMED CT in DICOM inclusive superset)'	'2019-12-26T16:57:59Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/5
-'Terminology Issue #4'	'SNOMED CT in DICOM subtask (2): Determine what portions of DICOM the current ICD SCT concepts used are drawn from'	'2019-12-26T16:55:49Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/4
-'Terminology Issue #3'	'SNOMED CT in DICOM subtask (1) Ask the client for examples of SNOMED CT concepts that are currently used.'	'2019-12-26T16:51:58Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/3
-'Terminology Issue #2'	'Create suggested maps to NCiT for IDC SNOMED CT in DICOM concepts in use '	'2019-12-23T21:31:15Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/2
-'Terminology Issue #1'	'Determine the scope of (enumerate) the SNOMED CT concepts that are utilized within DICOM by the IDC'	'2019-12-23T21:17:15Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/Terminology/issues/1
-'data-model-harmonization Issue #14'	'Evaluate other extant standards for representing cancer data'	'2020-07-30T18:19:53Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/14
-'data-model-harmonization Issue #13'	'Phase I Retrospective/ Phase II Plan Review'	'2020-07-19T19:08:56Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/13
-'data-model-harmonization Issue #12'	'Bring IDC data model into our pipeline'	'2020-07-15T13:10:01Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/12
-'data-model-harmonization Issue #11'	'Establish a system (resources, processes, roles) for keeping SSDs, ADM, and CDM in sync with upstream node models'	'2020-07-15T13:07:33Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/11
-'data-model-harmonization Issue #10'	'Establish a Github-based workflow for coordinated model development between teams'	'2020-07-15T13:03:30Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/10
-'data-model-harmonization Issue #9'	'Decide on formal implementation language/framework for CRDC-H'	'2020-07-15T13:03:19Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/9
-'data-model-harmonization Issue #8'	'CDM prototype evaluation and refinement'	'2020-07-15T12:58:15Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/8
-'data-model-harmonization Issue #7'	'Finish refactoring Biospecimen and Administrative entities into the CDM'	'2020-07-15T12:54:00Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/7
-'data-model-harmonization Issue #6'	'Update ADM and mappings to include new ICDC Sample properties '	'2020-05-18T17:14:27Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/6
-'data-model-harmonization Issue #5'	'Properties and data types to hold identifiers'	'2020-05-07T14:01:00Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/5
-'data-model-harmonization Issue #4'	'Terminological conventions for developing and documenting our model'	'2020-05-07T13:41:16Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/4
-'data-model-harmonization Issue #2'	'BRIDG Mappings for Specimen elements about the anatomical source'	'2020-04-17T20:36:35Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/data-model-harmonization/issues/2
-'operations Issue #65'	'Del.E2f: Pilot Metadata Mapping and Transformation tools'	'2020-07-13T14:59:50Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/65
-'operations Issue #64'	'Select a modeling language in which to represent the CRDC-H model'	'2020-06-15T03:23:30Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/64
-'operations Issue #61'	'GitHub Tracker for CCDH / node communication'	'2020-04-21T20:56:17Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/61
-'operations Issue #59'	'Del.E2e Support Service and Engagement Plan'	'2020-04-21T20:22:19Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/59
-'operations Issue #57'	'1a5 - map key components of queries to ontologies (follow up)'	'2020-04-21T20:00:29Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/57
-'operations Issue #56'	'1c2 Evaluate data population of nodes data models (which portions are populated, are they consistently populated, etc.)'	'2020-03-26T05:12:36Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/56
-'operations Issue #52'	'Development of User Stories / Storyboards for CCDH Use Cases'	'2019-12-26T17:08:46Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/52
-'operations Issue #51'	'Name project drivers / milestones which create timeframe for completion of Operations issue #48: "Take all SNOMED terms in DICOM standard that are relevant to IDC and make recommendations for mappings to NCIt"'	'2019-12-23T20:57:59Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/51
-'operations Issue #50'	'Get technical contacts for each of the nodes'	'2019-12-19T22:20:30Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/50
-'operations Issue #48'	'Ensure coverage of mappings from SNOMED terms in DICOM to NCIt'	'2019-12-18T23:54:30Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/48
-'operations Issue #46'	'2b1f	Develop a terminology/ontology management and delivery platform'	'2019-12-18T19:26:33Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/46
-'operations Issue #45'	'document representative example data (where available)'	'2019-12-18T19:13:04Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/45
-'operations Issue #44'	'document discrepancies, inconsistencies, or gaps within each node'	'2019-12-18T19:09:43Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/44
-'operations Issue #37'	'create GH issue(s) to discuss change management'	'2019-12-17T22:43:33Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/37
-'operations Issue #35'	'put up structure for storyboards'	'2019-12-17T22:01:05Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/35
-'operations Issue #32'	'Synthesis of Specification gathering'	'2019-12-12T19:20:54Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/32
-'operations Issue #30'	'2b1: Metadata Mapping and Transformation tools'	'2019-12-12T17:22:16Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/30
-'operations Issue #29'	'2b1e: Develop a set of terminology services'	'2019-12-11T05:47:40Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/29
-'operations Issue #28'	'2b1d: Develop an initial comprehensive terminology resource'	'2019-12-11T05:46:23Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/28
-'operations Issue #27'	'2b1b: Write release notes for web portal v1'	'2019-12-11T04:26:36Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/27
-'operations Issue #26'	'2b1g: Work with nodes to map and transform data'	'2019-12-11T04:24:38Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/26
-'operations Issue #25'	'2b1a: Create web portal v1'	'2019-12-11T01:34:38Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/25
-'operations Issue #24'	'2a2: Develop user support documentation and materials (Concierge Services)'	'2019-12-11T01:32:10Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/24
-'operations Issue #23'	'2a1: Create and maintain a Help desk'	'2019-12-11T01:31:14Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/23
-'operations Issue #22'	'1b5: Develop plan for how provenance features will be accessed and used in the web portal'	'2019-12-11T01:29:54Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/22
-'operations Issue #21'	'1b3: Define requirements for maintaining provenance during metadata manipulations'	'2019-12-11T01:26:36Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/21
-'operations Issue #20'	'1b2: Define specific data annotation tasks needed by the community'	'2019-12-11T01:26:13Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/20
-'operations Issue #19'	'1a7: Report of common and unique needs of each node'	'2019-12-11T01:25:48Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/19
-'operations Issue #18'	'Del.E2b: Initial CRDC-H mapping'	'2019-12-11T01:25:24Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/18
-'operations Issue #17'	'1a6: Ontology and model identification and selection for particular data / entity types'	'2019-12-11T01:24:40Z'	'2020-12-31'	0	''	https://github.com/cancerDHC/operations/issues/17
+"operations Issue #94"	"2b1c: Iterative web portal releases"	""	""	100	""	https://github.com/cancerDHC/operations/issues/94
+"operations Issue #91"	"2b2e: Data migration tool planning"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/91
+"operations Issue #90"	"2b2d: Release metadata mapping and transformation tool"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/90
+"operations Issue #89"	"2b2b, c, f, g: Create a tool for automated validation and checking"	"2021-04-01"	"2021-05-31"	100	"operations Issue #86"	https://github.com/cancerDHC/operations/issues/89
+"operations Issue #88"	"null"	""	""	100	""	https://github.com/cancerDHC/operations/issues/88
+"operations Issue #87"	"2b2a: Create a list of standard data and metadata parameters to validate"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/87
+"operations Issue #86"	"2b2: Create & pilot a metadata validator"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/86
+"operations Issue #85"	"2b1j, k, l: Create a semi-automated workflow for mapping and transformation for new data"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/85
+"operations Issue #84"	"2b1i: Evaluate and align portions of the CRDC-H against other standard models (FHIR, etc.)"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/84
+"operations Issue #83"	"2b1h: Develop and extend CRDC-H for use in the primary CRDC nodes"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/83
+"operations Issue #78"	"rename node specific channels in Slack"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/operations/issues/78
+"operations Issue #75"	"1c Plan and outline approach for CRDC model harmonization with Domain-Specific Nodes (GDC, PDC, ICDC and IDC)"	"2020-01-01"	"2020-03-31"	100	"operations Issue #9, operations Issue #56"	https://github.com/cancerDHC/operations/issues/75
+"operations Issue #74"	"1a Identify semantic priorities of DCF, CRDC nodes and DCCs"	"2019-10-01"	"2020-03-31"	100	"operations Issue #6, operations Issue #7"	https://github.com/cancerDHC/operations/issues/74
+"operations Issue #65"	"Del.E2f: Pilot Metadata Mapping and Transformation tools"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/65
+"operations Issue #64"	"Select a modeling language in which to represent the CRDC-H model"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/operations/issues/64
+"operations Issue #62"	"Deep dive into the Portable Format for Biomedical (PFB)"	""	""	100	""	https://github.com/cancerDHC/operations/issues/62
+"operations Issue #61"	"GitHub Tracker for CCDH / node communication"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/operations/issues/61
+"operations Issue #59"	"Del.E2e Support Service and Engagement Plan"	"2021-04-01"	"2021-05-31"	100	"operations Issue #23, operations Issue #24"	https://github.com/cancerDHC/operations/issues/59
+"operations Issue #58"	"Enhance community engagement plan"	""	""	100	""	https://github.com/cancerDHC/operations/issues/58
+"operations Issue #57"	"1a5 - map key components of queries to ontologies (follow up)"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/57
+"operations Issue #56"	"1c2 Evaluate data population of nodes data models (which portions are populated, are they consistently populated, etc.)"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/56
+"operations Issue #54"	"Plan a face to face meeting with the nodes"	""	""	100	""	https://github.com/cancerDHC/operations/issues/54
+"operations Issue #53"	"Make cmap for each target model"	""	""	100	"operations Issue #9"	https://github.com/cancerDHC/operations/issues/53
+"operations Issue #52"	"Development of User Stories / Storyboards for CCDH Use Cases"	""	""	100	""	https://github.com/cancerDHC/operations/issues/52
+"operations Issue #51"	"Name project drivers / milestones which create timeframe for completion of Operations issue #48"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/51
+"operations Issue #50"	"Get technical contacts for each of the nodes"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/50
+"operations Issue #48"	"Ensure coverage of mappings from SNOMED terms in DICOM to NCIt"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/operations/issues/48
+"operations Issue #46"	"2b1f	Develop a terminology/ontology management and delivery platform"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/46
+"operations Issue #45"	"document representative example data (where available)"	"2020-01-01"	"2020-03-31"	100	""	https://github.com/cancerDHC/operations/issues/45
+"operations Issue #44"	"document discrepancies, inconsistencies, or gaps within each node"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/operations/issues/44
+"operations Issue #43"	"document in-common data model components and their relationships for Wave 1 models"	""	""	100	"operations Issue #41, operations Issue #42"	https://github.com/cancerDHC/operations/issues/43
+"operations Issue #42"	"document data element definitions and ontologies used for Wave 1"	""	""	100	"operations Issue #41"	https://github.com/cancerDHC/operations/issues/42
+"operations Issue #41"	"Make cmap for each Wave 1 data model"	""	""	100	""	https://github.com/cancerDHC/operations/issues/41
+"operations Issue #40"	"Share competency query dataset in Zenodo"	""	""	100	""	https://github.com/cancerDHC/operations/issues/40
+"operations Issue #38"	"SWOT for each node"	""	""	100	"operations Issue #32"	https://github.com/cancerDHC/operations/issues/38
+"operations Issue #37"	"create GH issue(s) to discuss change management"	"2020-01-01"	"2020-03-31"	100	""	https://github.com/cancerDHC/operations/issues/37
+"operations Issue #36"	"Community engagement plan for iterative feedback and implementation of model/terminology/services"	""	""	100	""	https://github.com/cancerDHC/operations/issues/36
+"operations Issue #35"	"put up structure for storyboards"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/operations/issues/35
+"operations Issue #34"	"create a google doc with the 5 research questions that were mentioned in CDA RFP"	""	""	100	""	https://github.com/cancerDHC/operations/issues/34
+"operations Issue #33"	"need to think about invite list for mid-Feb community meeting"	""	""	100	"operations Issue #36"	https://github.com/cancerDHC/operations/issues/33
+"operations Issue #32"	"Synthesis of Specification gathering"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/operations/issues/32
+"operations Issue #31"	"1b: Plan for supporting core semantic standards and providing concierge service"	"2019-10-01"	"2020-03-31"	100	"operations Issue #10"	https://github.com/cancerDHC/operations/issues/31
+"operations Issue #30"	"2b1: Metadata Mapping and Transformation tools"	"2021-04-01"	"2021-05-31"	100	"operations Issue #25, operations Issue #27, operations Issue #29"	https://github.com/cancerDHC/operations/issues/30
+"operations Issue #29"	"2b1e: Develop a set of terminology services"	"2021-04-01"	"2021-05-31"	100	"operations Issue #28"	https://github.com/cancerDHC/operations/issues/29
+"operations Issue #28"	"2b1d: Develop an initial comprehensive terminology resource"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/28
+"operations Issue #27"	"2b1b: Write release notes for web portal v1"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/operations/issues/27
+"operations Issue #26"	"2b1g: Work with nodes to map and transform data"	"2021-04-01"	"2021-05-31"	100	"operations Issue #46"	https://github.com/cancerDHC/operations/issues/26
+"operations Issue #25"	"2b1a: Create web portal v1"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/operations/issues/25
+"operations Issue #24"	"2a2: Develop user support documentation and materials (Concierge Services)"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/24
+"operations Issue #23"	"2a1: Create and maintain a Help desk"	"2021-04-01"	"2021-05-31"	100	"operations Issue #31"	https://github.com/cancerDHC/operations/issues/23
+"operations Issue #22"	"1b5: Develop plan for how provenance features will be accessed and used in the web portal"	"2019-10-01"	"2020-03-31"	0	"operations Issue #21"	https://github.com/cancerDHC/operations/issues/22
+"operations Issue #21"	"1b3: Define requirements for maintaining provenance during metadata manipulations"	"2019-10-01"	"2020-03-31"	0	""	https://github.com/cancerDHC/operations/issues/21
+"operations Issue #20"	"1b2: Define specific data annotation tasks needed by the community"	"2019-10-01"	"2020-03-31"	100	""	https://github.com/cancerDHC/operations/issues/20
+"operations Issue #19"	"1a7: Report of common and unique needs of each node"	"2020-01-01"	"2020-03-31"	100	""	https://github.com/cancerDHC/operations/issues/19
+"operations Issue #18"	"Del.E2b: Initial CRDC-H mapping"	"2020-01-01"	"2020-03-31"	100	""	https://github.com/cancerDHC/operations/issues/18
+"operations Issue #17"	"1a6: Ontology and model identification and selection for particular data / entity types"	"2019-10-01"	"2020-03-31"	0	""	https://github.com/cancerDHC/operations/issues/17
+"operations Issue #16"	"1d3: Get feedback on mockups from users"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/operations/issues/16
+"operations Issue #15"	"1b1: Define specific metadata validation and transformation tasks needed by the community"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/operations/issues/15
+"operations Issue #14"	"1a5: Map key components of queries to ontologies"	"2019-10-01"	"2020-03-31"	100	"operations Issue #13"	https://github.com/cancerDHC/operations/issues/14
+"operations Issue #13"	"1a4: Develop competency questions"	"2019-10-01"	"2020-03-31"	100	""	https://github.com/cancerDHC/operations/issues/13
+"operations Issue #12"	"1d2: Create web portal mockups"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/operations/issues/12
+"operations Issue #11"	"1a3: Conduct interviews"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/operations/issues/11
+"operations Issue #10"	"1d1: Create timeline for web portal development"	"2019-10-01"	"2020-03-31"	100	""	https://github.com/cancerDHC/operations/issues/10
+"operations Issue #9"	"1c1: Evaluate overlaps in the Wave 1 models, submodel consistency, and domain specific components"	"2020-01-01"	"2020-03-31"	100	"operations Issue #41, operations Issue #42, operations Issue #43, operations Issue #45, operations Issue #44"	https://github.com/cancerDHC/operations/issues/9
+"operations Issue #8"	"1b4: Investigate tool and data workflow landscape"	"2019-10-01"	"2020-03-31"	100	""	https://github.com/cancerDHC/operations/issues/8
+"operations Issue #7"	"1a2: Understand use cases"	"2019-10-01"	"2020-03-31"	100	"operations Issue #6"	https://github.com/cancerDHC/operations/issues/7
+"operations Issue #6"	"1a1: Review existing node materials"	"2019-10-01"	"2020-03-31"	100	""	https://github.com/cancerDHC/operations/issues/6
+"operations Issue #5"	"Requirements gathering from nodes"	""	""	100	""	https://github.com/cancerDHC/operations/issues/5
+"operations Issue #4"	"schedule regular meetings"	""	""	100	""	https://github.com/cancerDHC/operations/issues/4
+"operations Issue #3"	"collate and organize node painpoints"	""	""	100	""	https://github.com/cancerDHC/operations/issues/3
+"operations Issue #2"	"uberon human view"	""	""	100	""	https://github.com/cancerDHC/operations/issues/2
+"operations Issue #1"	"Project Launch"	""	""	100	""	https://github.com/cancerDHC/operations/issues/1
+"data-model-harmonization Issue #19"	"Questions about the Google Sheets representation of CDM v1.0"	""	""	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/19
+"data-model-harmonization Issue #18"	"Specimen.analyte_concentration_method name"	""	""	0	""	https://github.com/cancerDHC/data-model-harmonization/issues/18
+"data-model-harmonization Issue #17"	"Provide feedback to the Cancer Data Service (CDS) on Minimum Metadata Requirements for Submission"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/17
+"data-model-harmonization Issue #16"	"CDA MVP v0 Deliverables"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/16
+"data-model-harmonization Issue #15"	"Terra Interoperability Model Knowledge Transfer with CCDH"	""	""	0	""	https://github.com/cancerDHC/data-model-harmonization/issues/15
+"data-model-harmonization Issue #14"	"Evaluate other extant standards for representing cancer data"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/14
+"data-model-harmonization Issue #13"	"Phase I Retrospective/ Phase II Plan Review"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/13
+"data-model-harmonization Issue #12"	"Bring IDC data model into our pipeline"	"2021-07-01"	"2021-09-30"	0	""	https://github.com/cancerDHC/data-model-harmonization/issues/12
+"data-model-harmonization Issue #11"	"Establish a system (resources, processes, roles) for keeping SSDs, ADM, and CDM in sync with upstream node models"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/11
+"data-model-harmonization Issue #10"	"Establish a Github-based workflow for coordinated model development between teams"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/10
+"data-model-harmonization Issue #9"	"Decide on formal implementation language/framework for CRDC-H"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/9
+"data-model-harmonization Issue #8"	"CDM prototype evaluation and refinement"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/8
+"data-model-harmonization Issue #7"	"Finish refactoring Biospecimen and Administrative entities into the CDM"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/7
+"data-model-harmonization Issue #6"	"Update ADM and mappings to include new ICDC Sample properties "	"2021-07-01"	"2021-09-30"	0	""	https://github.com/cancerDHC/data-model-harmonization/issues/6
+"data-model-harmonization Issue #5"	"Properties and data types to hold identifiers"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/5
+"data-model-harmonization Issue #4"	"Terminological conventions for developing and documenting our model"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/4
+"data-model-harmonization Issue #3"	"BRIDG and FHIR 'covering model' diagrams"	""	""	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/3
+"data-model-harmonization Issue #2"	"BRIDG Mappings for Specimen elements about the anatomical source"	""	""	0	""	https://github.com/cancerDHC/data-model-harmonization/issues/2
+"data-model-harmonization Issue #1"	"Sprints toward May CRDC-H Deliverable"	""	""	100	""	https://github.com/cancerDHC/data-model-harmonization/issues/1
+"Terminology Issue #34"	"Confirm mappings"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/34
+"Terminology Issue #33"	"Deprecated values and mappings (Question for GDC)"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/33
+"Terminology Issue #32"	"Value-identifier pairs in GDC data dictionary (Question for GDC)"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/32
+"Terminology Issue #31"	"String values vs identifiers in GDC data dictionary (Question for GDC)"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/31
+"Terminology Issue #30"	"Create CCDH "Ontology" "	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/30
+"Terminology Issue #29"	"create code set definitions for CCDH fields"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/29
+"Terminology Issue #28"	"get proposed target concept schemes into TCCM representation"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/28
+"Terminology Issue #27"	"MVP concept schemes "	"2021-01-01"	"2021-03-31"	0	""	https://github.com/cancerDHC/Terminology/issues/27
+"Terminology Issue #26"	"Implement a tool to manage the permissible value mappings"	"2020-10-01"	"2020-12-31"	0	""	https://github.com/cancerDHC/Terminology/issues/26
+"Terminology Issue #25"	"Complete the permissible value mappings for the MVP model"	"2020-10-01"	"2020-12-31"	0	""	https://github.com/cancerDHC/Terminology/issues/25
+"Terminology Issue #24"	"Deploy a terminological browser for cancer research"	"2020-10-01"	"2020-12-31"	0	""	https://github.com/cancerDHC/Terminology/issues/24
+"Terminology Issue #23"	"Value Set harmonization for the MVP v0 models"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/Terminology/issues/23
+"Terminology Issue #22"	"Design patterns - improve CaDSR patterns"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/22
+"Terminology Issue #21"	"Need strategic set of recommendations for NCI"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/21
+"Terminology Issue #20"	"Value set and mapping versioning"	"2020-10-01"	"2020-12-31"	0	""	https://github.com/cancerDHC/Terminology/issues/20
+"Terminology Issue #19"	"Perform mapping process"	""	""	100	""	https://github.com/cancerDHC/Terminology/issues/19
+"Terminology Issue #18"	"Determine mapping environment"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/Terminology/issues/18
+"Terminology Issue #17"	"Continue TCCM Implementation"	"2021-01-01"	"2021-03-31"	0	""	https://github.com/cancerDHC/Terminology/issues/17
+"Terminology Issue #16"	"Begin TCCM implementation"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/Terminology/issues/16
+"Terminology Issue #15"	"Complete TCCM Model definition"	"2020-10-01"	"2020-12-31"	0	""	https://github.com/cancerDHC/Terminology/issues/15
+"Terminology Issue #14"	"Add value set validation capability to Shape Expressions"	"2021-01-01"	"2021-03-31"	0	""	https://github.com/cancerDHC/Terminology/issues/14
+"Terminology Issue #13"	"Complete the value set modeling support in BiolinkML"	"2020-10-01"	"2020-12-31"	0	""	https://github.com/cancerDHC/Terminology/issues/13
+"Terminology Issue #12"	"Determine representational model for maps"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/Terminology/issues/12
+"Terminology Issue #11"	"Define the representational model for value sets"	"2020-10-01"	"2020-12-31"	0	""	https://github.com/cancerDHC/Terminology/issues/11
+"Terminology Issue #10"	"Determine how to represent caDSR "intensional" value sets as FHIR value sets for mapping purposes"	"2020-10-01"	"2020-12-31"	0	""	https://github.com/cancerDHC/Terminology/issues/10
+"Terminology Issue #9"	"Represent value sets as FHIR value sets"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/Terminology/issues/9
+"Terminology Issue #8"	"Assemble existing value sets in tabular format"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/Terminology/issues/8
+"Terminology Issue #7"	"Terminology WS requirement for Appendix A: "Phase I: Planning" missing from project folders.  What reference should the Terminology WS be using?"	""	""	0	"Terminology Issue #14, Terminology Issue #13, Terminology Issue #7, Terminology Issue #6"	https://github.com/cancerDHC/Terminology/issues/7
+"Terminology Issue #6"	"SNOMED CT in DICOM subtasks (4): Determine if the IDC has current or future use cases which may leverage portions of SNOMED CT in DICOM superset"	""	""	67	""	https://github.com/cancerDHC/Terminology/issues/6
+"Terminology Issue #5"	"SNOMED CT in DICOM subtask (3): 3.	Determine what DICOM specifications utilize SNOMED CT in any form (SNOMED CT in DICOM inclusive superset)"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/5
+"Terminology Issue #4"	"SNOMED CT in DICOM subtask (2): Determine what portions of DICOM the current ICD SCT concepts used are drawn from"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/4
+"Terminology Issue #3"	"SNOMED CT in DICOM subtask (1) Ask the client for examples of SNOMED CT concepts that are currently used."	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/3
+"Terminology Issue #2"	"Create suggested maps to NCiT for IDC SNOMED CT in DICOM concepts in use "	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/2
+"Terminology Issue #1"	"Determine the scope of (enumerate) the SNOMED CT concepts that are utilized within DICOM by the IDC"	""	""	0	""	https://github.com/cancerDHC/Terminology/issues/1
+"tools Issue #35"	"Look into whether we can incorporate valuesets into the OLS instance we have"	""	""	0	""	https://github.com/cancerDHC/tools/issues/35
+"tools Issue #34"	"Put the "Entity" class back into the model"	""	""	100	""	https://github.com/cancerDHC/tools/issues/34
+"tools Issue #33"	"Label tasks that generate publicly visible deliverables"	""	""	100	""	https://github.com/cancerDHC/tools/issues/33
+"tools Issue #32"	"Build a pipeline for converting CRDC-H from Google Sheets to LinkML"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/tools/issues/32
+"tools Issue #31"	"data mapping service using linkml value sets"	""	""	0	"tools Issue #29"	https://github.com/cancerDHC/tools/issues/31
+"tools Issue #30"	"define validation approach for using terminology value sets with linkml"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/tools/issues/30
+"tools Issue #29"	"create runner for applying linkml validation to CRDC-H data"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/tools/issues/29
+"tools Issue #28"	"specify formats for data adhering to CRDC-H model"	""	""	0	"tools Issue #27"	https://github.com/cancerDHC/tools/issues/28
+"tools Issue #27"	"create example CRDC-H data in JSON/linkml"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/tools/issues/27
+"tools Issue #26"	"DICOM SNOMED to ontology mappings master ticket"	""	""	100	""	https://github.com/cancerDHC/tools/issues/26
+"tools Issue #25"	"Investigate an instance where we didn't match a SNOMED term correctly through UMLS"	""	""	0	"tools Issue #22"	https://github.com/cancerDHC/tools/issues/25
+"tools Issue #24"	"Develop methods for validating the DICOM SNOMED mappings"	""	""	0	"tools Issue #20, tools Issue #21, tools Issue #23"	https://github.com/cancerDHC/tools/issues/24
+"tools Issue #23"	"Check DICOM SNOMED mappings against mappings already in the DICOM standard"	""	""	0	"tools Issue #22"	https://github.com/cancerDHC/tools/issues/23
+"tools Issue #22"	"Re-run SNOMED DICOM mappings with new UMLS release"	""	""	0	""	https://github.com/cancerDHC/tools/issues/22
+"tools Issue #21"	"Integrate BioPortal into SNOMED-in-DICOM mappings"	""	""	50	""	https://github.com/cancerDHC/tools/issues/21
+"tools Issue #20"	"Test grouping terms in mapping tool via NCImt hierarchy"	""	""	0	""	https://github.com/cancerDHC/tools/issues/20
+"tools Issue #19"	"Incorporate additional ontologies into DICOM SNOMED to NCIt mapping"	"2020-10-01"	"2020-12-31"	100	"tools Issue #7"	https://github.com/cancerDHC/tools/issues/19
+"tools Issue #18"	"PDC: Biggest challenge is transforming source data to GDC or PDC data dictionary – tools for data transformation (structured format) will be useful "	""	""	0	""	https://github.com/cancerDHC/tools/issues/18
+"tools Issue #17"	"Build a workflow for integrating example IDC data against standardized vocabularies; 2 imaging MVP data sets to test CEDAR/other tools for data annotation"	""	""	100	""	https://github.com/cancerDHC/tools/issues/17
+"tools Issue #16"	"Identify minimum metadata currently used by CRDC nodes"	""	""	0	""	https://github.com/cancerDHC/tools/issues/16
+"tools Issue #15"	"Choose a format for publishing harmonized datasets"	""	""	0	"tools Issue #4"	https://github.com/cancerDHC/tools/issues/15
+"tools Issue #14"	"Develop strategy and plan aligned with CRDC needs"	""	""	13	""	https://github.com/cancerDHC/tools/issues/14
+"tools Issue #13"	"Develop tools for metadata mapping, transformation and validation"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/tools/issues/13
+"tools Issue #12"	"Work with CDA to understand/help define their needs for ingesting/accessing the model and terminology support"	""	""	0	""	https://github.com/cancerDHC/tools/issues/12
+"tools Issue #11"	"Tools to enable stakeholders to implement CRDC-H (discussion with Seven Bridges, CDA)"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/tools/issues/11
+"tools Issue #10"	"Adapt tools currently evaluated as needs are defined"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/tools/issues/10
+"tools Issue #9"	"Discuss adaption and implementation of Metadata Validator with CDS"	""	""	0	""	https://github.com/cancerDHC/tools/issues/9
+"tools Issue #8"	"Discuss with PDC possible use of CEDAR/other tools for data annotation & approaches/tools for data transformation"	""	""	0	""	https://github.com/cancerDHC/tools/issues/8
+"tools Issue #7"	"Incorporate ontologies into DICOM SNOMED to NCIt mapping"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/tools/issues/7
+"tools Issue #6"	"Implement tool supporting use of SNOMED mappings"	"2020-04-01"	"2020-06-30"	100	""	https://github.com/cancerDHC/tools/issues/6
+"tools Issue #5"	"Implement boomer workflow for data model harmonization"	""	""	0	""	https://github.com/cancerDHC/tools/issues/5
+"tools Issue #4"	"Build a workflow for integrating example IDC data against standardized vocabularies"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/tools/issues/4
+"tools Issue #3"	"Choose a format for publishing mappings"	""	""	100	"tools Issue #22"	https://github.com/cancerDHC/tools/issues/3
+"tools Issue #2"	"review of CDS data and think about how it would be used to inform the requirements"	"2020-10-01"	"2020-12-31"	100	""	https://github.com/cancerDHC/tools/issues/2
+"tools Issue #1"	"Need to find out where infrastructure will be ultimately hosted"	"2020-04-01"	"2020-06-30"	100	""	https://github.com/cancerDHC/tools/issues/1
+"community-development Issue #72"	"CCDH Website: Revise FAQ"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/72
+"community-development Issue #71"	"CCDH GitHub Pages: Update landing page"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/71
+"community-development Issue #70"	"CCDH Website: Update figure in landing page"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/70
+"community-development Issue #69"	"CCDH Website: Update title for community interactions SOP page"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/69
+"community-development Issue #68"	"Update CCDH website release notes"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/68
+"community-development Issue #67"	"Create new page for Community Interactions SOP"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/67
+"community-development Issue #66"	"CCDH Website: correct link from FAQ to /ccdh-resources"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/66
+"community-development Issue #65"	"CCDH Website: Add explanation of 'how CCDH uses terminologies' to the FAQ"	"2021-04-01"	"2021-05-31"	100	"community-development Issue #63"	https://github.com/cancerDHC/community-development/issues/65
+"community-development Issue #64"	"CCDH Website: Update linkout for Top Level Menu 'FAQs' and title for submenu 'Glossary'"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/64
+"community-development Issue #63"	"CCDH Website: Add definition for 'data harmonization.' "	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/63
+"community-development Issue #62"	"CCDH Website: Add "Guidelines for professional behavior" link to FAQ"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/62
+"community-development Issue #61"	"CCDH Website Add Glossary Terms"	"2021-07-01"	"2021-09-30"	100	""	https://github.com/cancerDHC/community-development/issues/61
+"community-development Issue #60"	"[bug] remove ERO from standards list"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/60
+"community-development Issue #59"	"[bug] link to ICD is broken"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/59
+"community-development Issue #58"	"CCDH Website: Add a Glossary"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/58
+"community-development Issue #57"	"CCDH Website: Home page restyling"	"2021-07-01"	"2021-09-30"	0	""	https://github.com/cancerDHC/community-development/issues/57
+"community-development Issue #56"	"add HioH recording to website"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/56
+"community-development Issue #55"	"CCDH Website: Add Block, Call to Action, Join Us on Slack"	"2021-07-01"	"2021-09-30"	100	""	https://github.com/cancerDHC/community-development/issues/55
+"community-development Issue #54"	"add newsletters to website"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/54
+"community-development Issue #53"	"add additional presentations to website"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/53
+"community-development Issue #52"	"CCDH Website: Update 'FAQs' page"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/52
+"community-development Issue #51"	"CCDH Website: Add 'Contact Us' link to the footer"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/51
+"community-development Issue #50"	"CCDH Website: Update the 'About' page"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/50
+"community-development Issue #49"	"CCDH Website: Update Standards and Tooling Page"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/49
+"community-development Issue #48"	"CCDH Website: Update information in 'Team and Organization' page"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/48
+"community-development Issue #47"	"CCDH Website: Update information in 'Concierge' page"	"2021-04-01"	"2021-05-31"	100	"community-development Issue #43"	https://github.com/cancerDHC/community-development/issues/47
+"community-development Issue #46"	"CCDH Website: Update TopLevel Menus"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/46
+"community-development Issue #45"	"CCDH Website: Edit intro text in landing page"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/45
+"community-development Issue #44"	"CCDH Website Edits from NCI/FNL (2021-02-14)"	"2021-01-01"	"2021-03-31"	100	"community-development Issue #43, community-development Issue #47, community-development Issue #45, community-development Issue #50, community-development Issue #47, community-development Issue #50, community-development Issue #52, community-development Issue #51"	https://github.com/cancerDHC/community-development/issues/44
+"community-development Issue #43"	"CCDH website: Create new page to discuss CRDC-H, Terminology Services, and Validation Tool(s)"	"2021-04-01"	"2021-05-31"	100	""	https://github.com/cancerDHC/community-development/issues/43
+"community-development Issue #42"	"Upgrade Drupal Core to version 8.9.13 to address critical security advisory"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/community-development/issues/42
+"community-development Issue #41"	"Review and update workstream membership on web portal"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/community-development/issues/41
+"community-development Issue #40"	"Include "link back" element at top of CCDH Web Portal"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/community-development/issues/40
+"community-development Issue #38"	"feedback from NCI team re: web portal"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/38
+"community-development Issue #37"	"Add content to Standards and Tooling page"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/community-development/issues/37
+"community-development Issue #36"	"add tools to Standards and Tooling page?"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/community-development/issues/36
+"community-development Issue #35"	"web portal changes needed"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/35
+"community-development Issue #34"	"expand requirements gathering"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/community-development/issues/34
+"community-development Issue #33"	"combine table on Standards and Tooling page"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/33
+"community-development Issue #32"	"Add more content to CRDC Ecosystem webpage"	""	""	100	"community-development Issue #15"	https://github.com/cancerDHC/community-development/issues/32
+"community-development Issue #31"	"add enhancements to Standards page"	""	""	100	"community-development Issue #19"	https://github.com/cancerDHC/community-development/issues/31
+"community-development Issue #30"	"Improve formatting for the list of tools on the Standards and Tooling page"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/30
+"community-development Issue #29"	"fix links to email"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/29
+"community-development Issue #28"	"extra spaces"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/28
+"community-development Issue #27"	"rename labels for contact us?"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/27
+"community-development Issue #26"	"Add better explanations about “what the CCDH is doing”, “what is the value proposition"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/26
+"community-development Issue #25"	"Add more detail to timeline"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/community-development/issues/25
+"community-development Issue #24"	"Move WS descriptions to a single page with brief explanation for each WS"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/24
+"community-development Issue #23"	"move the contact us to the header "	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/community-development/issues/23
+"community-development Issue #22"	"merge team onto one page"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/community-development/issues/22
+"community-development Issue #21"	"add content: Intro text for Standards and Tooling"	""	""	100	"community-development Issue #19, community-development Issue #20"	https://github.com/cancerDHC/community-development/issues/21
+"community-development Issue #20"	"add content: Relevant resources"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/20
+"community-development Issue #19"	"add content: Relevant Ontologies and Standards"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/19
+"community-development Issue #18"	"support page - add content"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/18
+"community-development Issue #17"	"Rename CCDH Community"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/17
+"community-development Issue #16"	"create a page: Presentations"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/16
+"community-development Issue #15"	"add DMH info to Standards and Tooling page"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/15
+"community-development Issue #14"	"add link outs to CCDH nodes"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/14
+"community-development Issue #13"	"home page needs a banner"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/13
+"community-development Issue #12"	"update tools papge"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/12
+"community-development Issue #11"	"add link outs to homepages for team members"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/11
+"community-development Issue #10"	"add image to home page for webportal"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/10
+"community-development Issue #1"	"Create and coordinate user lists across methods of communication and within CRDC (ongoing)"	"2021-01-01"	"2021-03-31"	100	""	https://github.com/cancerDHC/community-development/issues/1
+"community-development Issue #2"	"create a CDA / CCDH Engagement Plan"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/community-development/issues/2
+"community-development Issue #3"	"create/disseminate Q3 newsletter "	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/community-development/issues/3
+"community-development Issue #4"	"create/disseminate Q2 newsletter"	"2020-04-01"	"2020-06-30"	100	""	https://github.com/cancerDHC/community-development/issues/4
+"community-development Issue #5"	"Re-announce existence of Help desk to nodes after the v0.1 harmonized model has been drafted"	"2020-04-01"	"2020-06-30"	100	""	https://github.com/cancerDHC/community-development/issues/5
+"community-development Issue #6"	"Create an org chart of the CRDC"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/community-development/issues/6
+"community-development Issue #8"	"Finalize FAQ doc for web portal"	"2020-07-01"	"2020-09-30"	100	""	https://github.com/cancerDHC/community-development/issues/8
+"community-development Issue #7"	"IDC reports 84 distinct elements - would like a list of these"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/7
+"community-development Issue #9"	"Summit with the CDA team"	""	""	100	""	https://github.com/cancerDHC/community-development/issues/9
