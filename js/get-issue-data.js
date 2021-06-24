@@ -368,7 +368,6 @@ function writeGanttDataFile() {
       alltasks.forEach(function(task) {
         // check if issue is a pull request or issue;
         // if pull request, then ignore
-        console.log(task);
         if (isGHIssue(task.url)) {
           // task ID
           tsvRow = "\"" + task.id + "\"";
@@ -447,7 +446,6 @@ function getRequest(repo, npages, alltasks, resolve, reject) {
       let data = JSON.parse(xhttp.responseText);
       // Create a gantt chart task for each issue in the repo.
       // Syntax: https://frappe.io/gantt
-      console.log(data);
       data.forEach(function(issue) {
         // check if issue is a pull request or issue;
         // if pull requeent, then ignore
