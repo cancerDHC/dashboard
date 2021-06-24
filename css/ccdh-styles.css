@@ -9,6 +9,8 @@
       overflow: scroll;
     } */
 
+    .right {float: right;}
+
     .gantt-target div {
       margin-top: 5px;
     }

@@ -19,11 +19,13 @@
       <span class="ops-bg viewbtn"><button type="button" class="view active ops">Operations</button>&nbsp; &nbsp;</span>
     </div>
     <div class="gantt-target"></div>
+    <div class="right">
+      <button class="admin" onclick="writeGanttDataFile()">Create TSV - All GitHub Issues</button>
+    </div>
     <div class="timeline-view" role="group">
       <button type="button" class="btn active">Month</button>
       <button type="button" class="btn">Year</button>
     </div>
-    <div><button class="admin" onclick="writeGanttDataFile()">Create TSV - All GitHub Issues</button></div>
   </div>
 
   <script src="js/get-issue-data.js"></script>
