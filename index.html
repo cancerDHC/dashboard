@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>CCDH Project Task Dashboard</title>
-	<link rel="stylesheet" href="css/ccdh-styles.css" />
-	<link rel="stylesheet" href="js/lib/frappe-gantt/frappe-gantt.css" />
-	<script type="text/javascript" src="js/lib/frappe-gantt/frappe-gantt.js"></script>
-	<script type="text/javascript" src="js/lib/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <title>CCDH Project Task Dashboard</title>
+  <link rel="stylesheet" href="css/ccdh-styles.css" />
+  <link rel="stylesheet" href="js/lib/frappe-gantt/frappe-gantt.css" />
+  <script type="text/javascript" src="js/lib/frappe-gantt/frappe-gantt.js"></script>
+  <script type="text/javascript" src="js/lib/jquery.min.js"></script>
 </head>
 <body>
-	<div class="container">
-		<h2>CCDH Project Task Dashboard</h2>  
-		<div class="chart-view" role="group">
-		  <span class="comdev-bg viewbtn"><button type="button" class="view active comdev">Community Development</button>&nbsp; &nbsp;</span>
-		  <span class="dmh-bg viewbtn"><button type="button" class="view active dmh">Data Model Harmonization</button>&nbsp; &nbsp;</span>
-		  <span class="term-bg viewbtn"><button type="button" class="view active term">Terminology</button>&nbsp; &nbsp;</span>
-		  <span class="tools-bg viewbtn"><button type="button" class="view active tools">Tools</button>&nbsp; &nbsp;</span>
-		  <span class="ops-bg viewbtn"><button type="button" class="view active ops">Operations</button>&nbsp; &nbsp;</span>
-		</div>
-		<div class="gantt-target"></div>
-		<div class="timeline-view" role="group">
-		  <button type="button" class="btn active">Month</button>
-		  <button type="button" class="btn">Year</button>
-		</div>
-		<div><button class="admin" onclick="writeGanttDataFile()">Create TSV - All GitHub Issues</button></div>
-	</div>
+  <div class="container">
+    <h2>CCDH Project Task Dashboard</h2>
+    <div class="chart-view" role="group">
+      <span class="comdev-bg viewbtn"><button type="button" class="view active comdev">Community Development</button>&nbsp; &nbsp;</span>
+      <span class="dmh-bg viewbtn"><button type="button" class="view active dmh">Data Model Harmonization</button>&nbsp; &nbsp;</span>
+      <span class="term-bg viewbtn"><button type="button" class="view active term">Terminology</button>&nbsp; &nbsp;</span>
+      <span class="tools-bg viewbtn"><button type="button" class="view active tools">Tools</button>&nbsp; &nbsp;</span>
+      <span class="ops-bg viewbtn"><button type="button" class="view active ops">Operations</button>&nbsp; &nbsp;</span>
+    </div>
+    <div class="gantt-target"></div>
+    <div class="timeline-view" role="group">
+      <button type="button" class="btn active">Month</button>
+      <button type="button" class="btn">Year</button>
+    </div>
+    <div><button class="admin" onclick="writeGanttDataFile()">Create TSV - All GitHub Issues</button></div>
+  </div>
 
-	<script src="js/get-issue-data.js"></script>
+  <script src="js/get-issue-data.js"></script>
 </body>
 </html>
