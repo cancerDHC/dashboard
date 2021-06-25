@@ -277,11 +277,12 @@ function sortTasks(alltasks) {
 
   // separate out operations tasks
   let opsTasks = [];
-  // separate out tasks without GH milestone and/or defined start/end date
-  let undatedTasks =[];
 
   //get list of which repos to show
   let activeRepos = whichRepos();
+
+  //flag to show/hide completed tasks
+  let showComplete = getShowComplete();
 
   alltasks.forEach(function(task) {
     item = [];
@@ -300,16 +301,17 @@ function sortTasks(alltasks) {
     let group = task.group_id;
     item.group_id = group;
 
-    //extract tasks with no dates
-    if (item.start == "") {
-      undatedTasks.push(item);
-    } else {
-      if (group == "operations") {
-        //separate out operations tasks
-        opsTasks.push(item);
-      } else if (activeRepos.includes(group)) {
-        // only push to task list if user has not delesected it
-        sortedTasks.push(item);
+    //first, filter out undated tasks
+    if (item.start != "") {
+      //next, filter by completion status, if needed
+      if (((!showComplete) && (item.progress < 100)) || (showComplete)) {
+        //separate out operations tasks to display at bottom
+        if (group == "operations") {
+          opsTasks.push(item);
+        } else if (activeRepos.includes(group)) {
+          // finally, push to task list if all other criteria are met
+          sortedTasks.push(item);
+        }
       }
     }
 
@@ -318,6 +320,7 @@ function sortTasks(alltasks) {
   //sort tasks by start date
   sortedTasks.sort((a, b) => (a.start > b.start) ? 1 : -1);
 
+  // add operations tasks at bottom, if user has chosen to display
   if (activeRepos.includes("operations")) {
     //sort operations tasks by date
     opsTasks.sort((a, b) => (a.start > b.start) ? 1 : -1);
@@ -498,6 +501,15 @@ function whichRepos(){
   return activeRepos;
 }
 
+function getShowComplete(){
+  let showAll = true;
+  let txt = $(".btnHideComplete").text();
+  if (txt == "Show Completed Tasks") {
+    showAll = false;
+  }
+  return showAll;
+}
+
 function createTasks() {
 
   //get list of selected repos
@@ -610,12 +622,30 @@ function createTasks() {
           $btn = $(this);
           let ws = $btn.text();
           $btn.toggleClass("active");
-
           //re-sort tasks to show/hide selected workstreams
           tasks = sortTasks(alltasks);
           gantt.refresh(tasks);
         });
       });
+
+      // toggle incomplete tasks
+      $(function() {
+        $(".completed-view").on("click", "button", function() {
+          //change button text
+          $btn = $(this);
+          let mode = $btn.text();
+          if (mode == "Hide Completed Tasks") {
+            $btn.text("Show Completed Tasks");
+          } else {
+            $btn.text("Hide Completed Tasks");
+          }
+          //re-sort tasks to show/hide tasks by completion status
+          tasks = sortTasks(alltasks);
+          gantt.refresh(tasks);
+        });
+      });
+
+
     });
   });
 }
