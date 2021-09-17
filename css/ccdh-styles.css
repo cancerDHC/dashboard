@@ -90,6 +90,11 @@
       outline-color: gray;
     }
 
+    .gantt .bar-wrapper:hover .bar-progress,
+    .gantt .bar-wrapper .active .bar-progress {
+      fill: #979797;
+    }
+
     /* custom color coding for each repo */
     /* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
     .gantt .tools .bar { fill: #999999; }
@@ -104,6 +109,13 @@
     /* color styles for the repo legend bar */
     .dmh-bg {background-color: #aace71;}
     .chart-view .dmh {background-color: #758e4f;}
+
+    /* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
+    .gantt .ccdhmodel .bar { fill: #7cb6f8;}
+    .gantt .ccdhmodel .bar-progress { fill: #1158aa; }
+    /* color styles for the repo legend bar */
+    .ccdhmodel-bg {background-color: #7cb6f8;}
+    .chart-view .ccdhmodel {background-color: #1158aa;}
 
     /* Gantt bar colors assigned to the repo via Frappe Gantt's custom class*/
     .gantt .community-development .bar { fill: #6eb29d;}

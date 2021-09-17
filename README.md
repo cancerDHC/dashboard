@@ -15,6 +15,7 @@ Workstream Name | GitHub Repo URL
 Operations | https://github.com/cancerDHC/operations/issues
 Community Development | https://github.com/cancerDHC/community-development/issues
 Data Model Harmonization | https://github.com/cancerDHC/data-model-harmonization/issues
+CRDCH Model | https://github.com/cancerDHC/ccdhmodel/issues
 Ontology and Terminology Ecosystem | https://github.com/cancerDHC/Terminology/issues
 Tools and Data Quality | https://github.com/cancerDHC/tools/issues
 

@@ -1,9 +1,15 @@
 // CCDH GitHub Repos
+
+// DEBUG ONLY - reset to empty string otherwise
+// allow for anonymous repo queries for production use
+const authToken = ""
+
 const repoBaseURL = "https://api.github.com/repos/cancerDHC/";
 let allRepos = [
   {name: "operations", data_pages: 1},
   {name: "community-development", data_pages: 1},
   {name: "data-model-harmonization", data_pages: 1},
+  {name: "ccdhmodel", data_pages: 1},
   {name: "Terminology", data_pages: 1},
   {name: "tools", data_pages: 1}
 ];
@@ -359,9 +365,9 @@ function writeGanttDataFile() {
     allRepos.forEach(function(repo) {
       //check which repo to get and how many pages of results
       let npages = repo.data_pages;
-      for (let i = 0; i < npages; i++) {
+      for (let npage = 0; npage < npages; npage++) {
         let p = new Promise(function(resolve, reject){
-          getRequest(repo.name, npages, alltasks, resolve, reject);
+          getRequest(repo.name, npage, alltasks, resolve, reject);
         });
         dataPromises.push(p);
       }
@@ -421,6 +427,9 @@ function checkRepoPagination(repo, resolve, reject) {
   }
   };
   xhttp.open("GET", url, true);
+  if (authToken) {
+    xhttp.setRequestHeader('Authorization', 'token ' + authToken)
+  }
   xhttp.send();
 }
 
@@ -444,6 +453,7 @@ function getRequest(repo, npages, alltasks, resolve, reject) {
     // code for IE6, IE5
     xhttp = new ActiveXObject("Microsoft.XMLHTTP");
   }
+
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       let data = JSON.parse(xhttp.responseText);
@@ -476,6 +486,9 @@ function getRequest(repo, npages, alltasks, resolve, reject) {
     }
   };
   xhttp.open("GET", url, true);
+  if (authToken) {
+    xhttp.setRequestHeader('Authorization', 'token ' + authToken)
+  }
   xhttp.send();
 }
 
@@ -490,6 +503,8 @@ function whichRepos(){
       activeRepos.push("community-development");
     } else if (str == "Data Model Harmonization") {
       activeRepos.push("data-model-harmonization");
+    } else if (str == "CRDCH Model") {
+      activeRepos.push("ccdhmodel");
     } else if (str == "Terminology") {
       activeRepos.push("Terminology");
     } else if (str == "Tools") {
@@ -537,9 +552,9 @@ function createTasks() {
     allRepos.forEach(function(repo) {
       //check which repo to get and how many pages of results
       let npages = repo.data_pages;
-      for (let i = 0; i < npages; i++) {
+      for (let npage = 0; npage < npages; npage++) {
         let p = new Promise(function(resolve, reject){
-          getRequest(repo.name, npages, alltasks, resolve, reject);
+          getRequest(repo.name, npage, alltasks, resolve, reject);
         });
         dataPromises.push(p);
       }
@@ -569,6 +584,11 @@ function createTasks() {
             bar_class: "bar-dmh"
           },
           {
+            id: "crdch-model",
+            name: "CRDC-H Model Workstream",
+            bar_class: "bar-model"
+          },
+          {
             id: "Terminology",
             name: "Ontology and Terminology Ecosystem Workstream",
             bar_class: "bar-term"
@@ -582,6 +602,8 @@ function createTasks() {
 
         //create a custom pop-up with the task group name, URL, title and dates
         custom_popup_html: function(task) {
+          if (!task) { return; }
+          if (!task._group.name) { task._group.name = '[Group]'}
           return `
           <div class="details-container">
             <div class="popup_head">${task._group.name}</div>
